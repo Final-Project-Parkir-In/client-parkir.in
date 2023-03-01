@@ -1,20 +1,73 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import Ionicons from "react-native-vector-icons/Ionicons";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+
+import Home from './screens/Home';
+import MyTicket from './screens/MyTicket';
+import MyAccount from './screens/MyAccount';
+import MallList from './screens/MallList';
+
+const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
+
+const StackHome = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen options={{ headerShown: false }} name="Home" component={Home} />
+      <Stack.Screen name="Mall List" component={MallList} />
+    </Stack.Navigator>
+  );
+};
+
+const StackTicket = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen options={{ headerShown: false }} name="" component={tba1} />
+      <Stack.Screen name="" component={tba2} />
+    </Stack.Navigator>
+  );
+};
+
+const StackAccount = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen options={{ headerShown: false }} name="" component={tba1} />
+      <Stack.Screen name="" component={tba2} />
+    </Stack.Navigator>
+  );
+};
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Tab.Navigator
+        screenOptions={({ route }) => ({
+          tabBarIcon: ({ focused, color, size }) => {
+            let iconName;
+            if (route.name === "Home") {
+              iconName = focused
+                ? "home"
+                : "home-outline";
+            } else if (route.name === "My Ticket") {
+              iconName = focused ? "document-text" : "document-text-outline";
+            } else if (route.name === "My Account") {
+              iconName = focused ? "person" : "person-outline";
+            }
+            return <Ionicons name={iconName} size={size} color={color} />;
+          },
+          tabBarActiveTintColor: "black",
+          tabBarInactiveTintColor: "gray",
+        })}
+      >
+
+        <Tab.Screen options={{ headerShown: false }} name="Home" component={StackHome} />
+        <Tab.Screen options={{ headerShown: true }} name="My Ticket" component={MyTicket} />
+        <Tab.Screen options={{ headerShown: true }} name="My Account" component={MyAccount} />
+
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

@@ -1,5 +1,6 @@
 import { ScrollView, View, Text, TouchableOpacity } from "react-native";
 import { Card } from "react-native-paper";
+import BannerSlider from "../components/BannerSlider";
 
 export default function Home({ navigation }) {
   return (
@@ -7,6 +8,7 @@ export default function Home({ navigation }) {
       <View className="h-[35vh] bg-slate-400">
         <Text className="m-auto">Disini gambar semacem jumbotron</Text>
       </View>
+      {/* <BannerSlider className="bg-slate-400" /> */}
 
       <View className="border flex flex-row h-[50vh] justify-center items-center">
         <View className="flex flex-row mx-2">

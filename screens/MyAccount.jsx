@@ -1,10 +1,10 @@
-import { ScrollView, View, Text } from 'react-native'
-import SpecifiedView from '../components/SpecifiedView'
+import { ScrollView, View, Text } from "react-native";
+import SpecifiedView from "../components/SpecifiedView";
 
 export default function MyAccount() {
   return (
-    <SpecifiedView>
+    <ScrollView>
       <Text>MyAccount</Text>
-    </SpecifiedView>
-  )
+    </ScrollView>
+  );
 }

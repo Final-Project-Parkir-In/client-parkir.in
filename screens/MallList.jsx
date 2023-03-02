@@ -1,9 +1,9 @@
-import { View, Text } from 'react-native'
+import { ScrollView, View, Text } from 'react-native'
 
 export default function MallList() {
   return (
-    <View>
+    <ScrollView>
       <Text>MallList</Text>
-    </View>
+    </ScrollView>
   )
 }

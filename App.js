@@ -16,7 +16,7 @@ const Tab = createBottomTabNavigator();
 const StackHome = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen options={{ headerShown: false }} name="Home" component={Home} />
+      <Stack.Screen options={{ headerShown: false }} name="Stack-Home" component={Home} />
       <Stack.Screen name="Mall List" component={MallList} />
     </Stack.Navigator>
   );
@@ -25,8 +25,7 @@ const StackHome = () => {
 const StackTicket = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen options={{ headerShown: false }} name="" component={tba1} />
-      <Stack.Screen name="" component={tba2} />
+      <Stack.Screen options={{ headerShown: false }} name="Stack-My Ticket" component={MyTicket} />
     </Stack.Navigator>
   );
 };
@@ -34,8 +33,7 @@ const StackTicket = () => {
 const StackAccount = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen options={{ headerShown: false }} name="" component={tba1} />
-      <Stack.Screen name="" component={tba2} />
+      <Stack.Screen options={{ headerShown: false }} name="Stack-My Account" component={MyAccount} />
     </Stack.Navigator>
   );
 };
@@ -58,14 +56,14 @@ export default function App() {
             }
             return <Ionicons name={iconName} size={size} color={color} />;
           },
-          tabBarActiveTintColor: "black",
-          tabBarInactiveTintColor: "gray",
+          tabBarActiveTintColor: "orange",
+          tabBarInactiveTintColor: "blue",
         })}
       >
 
         <Tab.Screen options={{ headerShown: false }} name="Home" component={StackHome} />
-        <Tab.Screen options={{ headerShown: true }} name="My Ticket" component={MyTicket} />
-        <Tab.Screen options={{ headerShown: true }} name="My Account" component={MyAccount} />
+        <Tab.Screen options={{ headerShown: true }} name="My Ticket" component={StackTicket} />
+        <Tab.Screen options={{ headerShown: true }} name="My Account" component={StackAccount} />
 
       </Tab.Navigator>
     </NavigationContainer>

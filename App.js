@@ -9,6 +9,7 @@ import Home from './screens/Home';
 import MyTicket from './screens/MyTicket';
 import MyAccount from './screens/MyAccount';
 import MallList from './screens/MallList';
+import MallDetail from './screens/MallDetail';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -17,7 +18,8 @@ const StackHome = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen options={{ headerShown: false }} name="Stack-Home" component={Home} />
-      <Stack.Screen name="Mall List" component={MallList} />
+      <Stack.Screen options={{ headerShown: true }} name="Mall List" component={MallList} />
+      <Stack.Screen options={{ headerShown: true }} name="Mall Detail" component={MallDetail} />
     </Stack.Navigator>
   );
 };

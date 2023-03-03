@@ -4,6 +4,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import Home from './screens/Home';
 import MyTicket from './screens/MyTicket';
@@ -11,6 +12,7 @@ import MyAccount from './screens/MyAccount';
 import MallList from './screens/MallList';
 import MapScreen from './screens/MapScreen';
 import MallDetail from './screens/MallDetail';
+import BookingPage from './views/BookingPage';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -29,6 +31,7 @@ const StackHome = () => {
 const StackTicket = () => {
   return (
     <Stack.Navigator>
+      <Stack.Screen name='E-Tiket' component={BookingPage}/>
       <Stack.Screen
         options={{ headerShown: false }}
         name='Stack-My Ticket'
@@ -89,3 +92,13 @@ export default function App() {
     </NavigationContainer>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignContent: 'center'
+  },
+});

@@ -12,6 +12,8 @@ import MyAccount from './screens/MyAccount';
 import MallList from './screens/MallList';
 import MapScreen from './screens/MapScreen';
 import MallDetail from './screens/MallDetail';
+import BarcodeScreen from './screens/BarcodeScreen';
+import PaymentScreens from './screens/PaymentScreen';
 import ParkingSelection from './screens/ParkingSelection';
 import PaymentPage from './screens/PaymentPage';
 import BookingPage from './views/BookingPage';
@@ -28,7 +30,7 @@ const StackHome = () => {
       <Stack.Screen options={{ headerShown: true }} name="Mall List" component={MallList} />
       <Stack.Screen options={{ headerShown: true }} name="Mall Detail" component={MallDetail} />
       <Stack.Screen options={{ headerShown: false }} name="Parking Selection" component={ParkingSelection} />
-      <Stack.Screen options={{ headerShown: true }} name="Payment Page" component={PaymentPage} />
+      <Stack.Screen options={{ headerShown: true }} name="Payment Page" component={PaymentScreens} />
     </Stack.Navigator>
   );
 };

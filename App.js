@@ -10,6 +10,8 @@ import MyTicket from './screens/MyTicket';
 import MyAccount from './screens/MyAccount';
 import MallList from './screens/MallList';
 import MallDetail from './screens/MallDetail';
+import ParkingSelection from './screens/ParkingSelection';
+import PaymentPage from './screens/PaymentPage';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -20,6 +22,8 @@ const StackHome = () => {
       <Stack.Screen options={{ headerShown: false }} name="Stack-Home" component={Home} />
       <Stack.Screen options={{ headerShown: true }} name="Mall List" component={MallList} />
       <Stack.Screen options={{ headerShown: true }} name="Mall Detail" component={MallDetail} />
+      <Stack.Screen options={{ headerShown: false }} name="Parking Selection" component={ParkingSelection} />
+      <Stack.Screen options={{ headerShown: true }} name="Payment Page" component={PaymentPage} />
     </Stack.Navigator>
   );
 };

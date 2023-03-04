@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
-import { WebView } from 'react-native-webview';
+import React, { useState, useEffect } from "react";
+import { View, Text, TouchableOpacity, ActivityIndicator } from "react-native";
+import { WebView } from "react-native-webview";
 import axios from 'axios';
+
 export default function PaymentScreens() {
   const [loading, setLoading] = useState(false);
 
   // transactions data set to false first for the loading
   const [transactions, setTransactions] = useState(false);
+
 
   useEffect(() => {
     (async () => {
@@ -26,17 +28,19 @@ export default function PaymentScreens() {
       }
     })();
   }, []);
+  
+  
   return (
     <>
       {!transactions ? (
         <View
           style={{
             flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
+            justifyContent: "center",
+            alignItems: "center",
           }}
         >
-          <ActivityIndicator color='#fff' size='large' />
+          <ActivityIndicator color="#fff" size="large" />
         </View>
       ) : (
         <>
@@ -45,6 +49,31 @@ export default function PaymentScreens() {
               uri: `${transactions.redirect_url}`,
             }}
           />
+          <TouchableOpacity
+            onPress={() => {
+              checkPayment();
+            }}
+            style={{
+              backgroundColor: "#3366FF",
+              padding: 20,
+              paddingVertical: 15,
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+            disabled={loading}
+          >
+            <Text
+              style={{
+                color: "white",
+                fontWeight: "bold",
+                fontSize: 18,
+              }}
+            >
+              Uwu
+            </Text>
+            {loading ? <ActivityIndicator color="#fff" /> : <Text>Uhui</Text>}
+          </TouchableOpacity>
         </>
       )}
     </>

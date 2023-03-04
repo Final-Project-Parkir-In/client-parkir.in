@@ -1,5 +1,5 @@
-import { Platform, View, SafeAreaView } from 'react-native';
-import { SafeAreaView as AndroidViews } from 'react-native-safe-area-context';
+import { Platform, SafeAreaView } from "react-native";
+import { SafeAreaView as AndroidViews } from "react-native-safe-area-context";
 
 const SpecifiedView = ({ children, style }) => {
   return Platform.OS === 'ios' ? (

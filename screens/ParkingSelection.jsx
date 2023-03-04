@@ -26,9 +26,9 @@ export default function ParkingSelection({ navigation }) {
             <View className="w-20 h-20 m-2 rounded-xl bg-amber-100 shadow-lg"></View>
           </View>
 
-          <View className="flex flex-row p-4 mt-8">
+          <View className="flex flex-row items-center p-4 mt-8">
             <View className="items-center gap-1 flex flex-row">
-              <Badge className="bg-[#D9A14E]" />
+              <Badge className="bg-amber-300" />
               <Text>Tersedia</Text>
             </View>
             <View className="items-center gap-1 flex flex-row mx-4">
@@ -36,7 +36,8 @@ export default function ParkingSelection({ navigation }) {
               <Text>Tidak Tersedia</Text>
             </View>
             <View className="items-center gap-1 flex flex-row">
-              <Badge className="bg-slate-400" />
+              <View className="bg-amber-300 border-2 border-[#2F3B6E] rounded-full h-6 w-6" />
+              {/* <Badge className="bg-[#D9A14E] border-[#2F3B6E]" /> */}
               <Text>Dipilih</Text>
             </View>
           </View>
@@ -52,7 +53,7 @@ export default function ParkingSelection({ navigation }) {
           onPress={() => navigation.navigate("Payment Page")}
           className="w-80 mb-10 mt-4 bg-[#2F3B6E] rounded-xl"
         >
-          Lanjutkan
+          Booking
         </Button>
       </View>
     </SpecifiedView>

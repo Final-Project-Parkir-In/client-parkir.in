@@ -21,10 +21,10 @@ const BookingPage = () => {
                     />
                     <View style={style.cardTextProductFilter}>
                         <Pressable style={style.boxFilter}>
-                            <Text style={{ color: '#ffc629' }}>Berlansung</Text>
+                            <Text style={{ color: '#ffff' }}>Berlangsung</Text>
                         </Pressable>
                         <Pressable style={style.boxFilter}>
-                            <Text style={{ color: '#ffc629' }}>Selesai</Text>
+                            <Text style={{ color: '#ffff' }}>Selesai</Text>
                         </Pressable>
                         <View style={{flexDirection: 'row', justifyContent: 'center', marginStart: 100}}>
                         <View style={{ alignItems: 'flex-end', justifyContent: 'center'}}>
@@ -118,15 +118,16 @@ const style = StyleSheet.create({
         padding: 8,
         marginLeft: 10,
         borderRadius: 100,
-        borderColor: '#ffc629',
+        borderColor: '#ffff',
+        backgroundColor: "#E9A23B"
     },
     textInput: {
         width: '90%',
         height: 35,
-        borderWidth: 1,
+        borderWidth: 0.5,
         borderRadius: 10,
         paddingLeft: 15,
-        backgroundColor: '#e6e3e3',
+        backgroundColor: '#ffff',
         color: 'black',
         marginTop: 20
     },

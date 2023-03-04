@@ -11,6 +11,8 @@ import MyAccount from './screens/MyAccount';
 import MallList from './screens/MallList';
 import MapScreen from './screens/MapScreen';
 import MallDetail from './screens/MallDetail';
+import BarcodeScreen from './screens/BarcodeScreen';
+import PaymentScreens from './screens/PaymentScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -18,10 +20,23 @@ const Tab = createBottomTabNavigator();
 const StackHome = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen options={{ headerShown: false }} name="Stack-Home" component={Home} />
-      <Stack.Screen name='maps' component={MapScreen} />
-      <Stack.Screen options={{ headerShown: true }} name="Mall List" component={MallList} />
-      <Stack.Screen options={{ headerShown: true }} name="Mall Detail" component={MallDetail} />
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name='Stack-Home'
+        component={Home}
+      />
+      <Stack.Screen name='maps' component={PaymentScreens} />
+
+      <Stack.Screen
+        options={{ headerShown: true }}
+        name='Mall List'
+        component={MallList}
+      />
+      <Stack.Screen
+        options={{ headerShown: true }}
+        name='Mall Detail'
+        component={MallDetail}
+      />
     </Stack.Navigator>
   );
 };

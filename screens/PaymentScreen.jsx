@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
-import { WebView } from 'react-native-webview';
-import base64 from 'base-64';
+import React, { useState, useEffect } from "react";
+import { View, Text, TouchableOpacity, ActivityIndicator } from "react-native";
+import { WebView } from "react-native-webview";
+import base64 from "base-64";
 export default function PaymentScreens() {
   const [loading, setLoading] = useState(false);
 
@@ -10,11 +10,11 @@ export default function PaymentScreens() {
 
   // on production dont place the server key here
   // dont forget add ":" in the end of the string
-  const serverKey = 'SB-Mid-server-eYv4NQeO2ODjMM6ywHr_YFX9:';
+  const serverKey = "SB-Mid-server-eYv4NQeO2ODjMM6ywHr_YFX9:";
   const base64Key = base64.encode(serverKey);
   // order ID
   const orderID =
-    'Your-Order-id' + Math.floor(100000000000 + Math.random() * 90000000);
+    "Your-Order-id" + Math.floor(100000000000 + Math.random() * 90000000);
 
   useEffect(() => {
     midtrans().then((data) => {
@@ -22,7 +22,7 @@ export default function PaymentScreens() {
       setTransactions(data);
       // checking if the order already paid or not
       if (data.error_messages) {
-        alert('This Order ID has been paid');
+        alert("This Order ID has been paid");
       }
     });
   }, []);
@@ -30,7 +30,7 @@ export default function PaymentScreens() {
   async function midtrans(user) {
     // url for transactions
     // this url is for sandbox
-    const url = 'https://app.sandbox.midtrans.com/snap/v1/transactions';
+    const url = "https://app.sandbox.midtrans.com/snap/v1/transactions";
     // use this url for production : https://app.midtrans.com
     const data = {
       transaction_details: {
@@ -39,38 +39,38 @@ export default function PaymentScreens() {
       },
       item_details: [
         {
-          id: 'PRODUCTID1',
+          id: "PRODUCTID1",
           price: 20000,
           quantity: 1,
-          name: 'Product 1',
-          category: 'Clothes',
-          merchant_name: 'Merchant',
+          name: "Product 1",
+          category: "Clothes",
+          merchant_name: "Merchant",
         },
         {
-          id: 'PRODUCTID2',
+          id: "PRODUCTID2",
           price: 40000,
           quantity: 1,
-          name: 'Product 2',
-          category: 'Clothes',
-          merchant_name: 'Merchant',
+          name: "Product 2",
+          category: "Clothes",
+          merchant_name: "Merchant",
         },
       ],
       credit_card: {
         secure: true,
       },
       customer_details: {
-        first_name: 'budi',
-        last_name: 'pratama',
-        email: 'budi.pra@example.com',
-        phone: '08111222333',
+        first_name: "budi",
+        last_name: "pratama",
+        email: "budi.pra@example.com",
+        phone: "08111222333",
       },
     };
     const response = await fetch(url, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: 'Basic ' + base64Key,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: "Basic " + base64Key,
       },
       body: JSON.stringify(data),
     });
@@ -82,11 +82,11 @@ export default function PaymentScreens() {
 
     // fetch data
     const response = await fetch(url, {
-      method: 'GET',
+      method: "GET",
       headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: 'Basic ' + base64Key,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: "Basic " + base64Key,
       },
     });
     return response.json();
@@ -98,15 +98,15 @@ export default function PaymentScreens() {
       if (data.status_code == 200) {
         console.log(data);
         setLoading(false);
-        alert('This Order ID has been paid');
+        alert("This Order ID has been paid");
       } else {
         console.log(data);
         setLoading(false);
-        alert('This Order ID has not been paid');
+        alert("This Order ID has not been paid");
       }
     });
   }
-  console.log(transactions, '<===');
+  console.log(transactions, "<===");
   if (loading) {
     return <Text>Loading</Text>;
   }
@@ -116,11 +116,11 @@ export default function PaymentScreens() {
         <View
           style={{
             flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
+            justifyContent: "center",
+            alignItems: "center",
           }}
         >
-          <ActivityIndicator color='#fff' size='large' />
+          <ActivityIndicator color="#fff" size="large" />
         </View>
       ) : (
         <>
@@ -134,25 +134,25 @@ export default function PaymentScreens() {
               checkPayment();
             }}
             style={{
-              backgroundColor: '#3366FF',
+              backgroundColor: "#3366FF",
               padding: 20,
               paddingVertical: 15,
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              alignItems: 'center',
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
             }}
             disabled={loading}
           >
             <Text
               style={{
-                color: 'white',
-                fontWeight: 'bold',
+                color: "white",
+                fontWeight: "bold",
                 fontSize: 18,
               }}
             >
               Uwu
             </Text>
-            {loading ? <ActivityIndicator color='#fff' /> : <Text>Uhui</Text>}
+            {loading ? <ActivityIndicator color="#fff" /> : <Text>Uhui</Text>}
           </TouchableOpacity>
         </>
       )}

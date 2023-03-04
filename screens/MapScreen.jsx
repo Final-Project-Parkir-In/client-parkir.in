@@ -63,6 +63,7 @@ export default function App() {
     return <Text>{errorMsg}</Text>;
   }
   console.log(coords);
+  
   return (
     <View style={styles.container}>
       <MapView

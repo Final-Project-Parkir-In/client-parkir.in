@@ -17,6 +17,8 @@ import PaymentScreens from './screens/PaymentScreen';
 import ParkingSelection from './screens/ParkingSelection';
 import PaymentPage from './screens/PaymentPage';
 import BookingPage from './views/BookingPage';
+import MyGarage from './screens/MyGarage';
+import MapsMallCard from './components/MapsMallCard';
 
 
 const Stack = createNativeStackNavigator();
@@ -26,7 +28,7 @@ const StackHome = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen options={{ headerShown: false }} name="Stack-Home" component={Home} />
-      <Stack.Screen name='maps' component={MapScreen} />
+      <Stack.Screen options={{ headerShown: true }} name="Parkir.In locations" component={MapScreen} />
       <Stack.Screen options={{ headerShown: true }} name="Mall List" component={MallList} />
       <Stack.Screen options={{ headerShown: true }} name="Mall Detail" component={MallDetail} />
       <Stack.Screen options={{ headerShown: false }} name="Parking Selection" component={ParkingSelection} />
@@ -38,7 +40,7 @@ const StackHome = () => {
 const StackTicket = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name='E-Tiket' component={BookingPage}/>
+      <Stack.Screen options={{ headerShown: false }} name="E-Tiket" component={BookingPage} />
       <Stack.Screen
         options={{ headerShown: false }}
         name='Stack-My Ticket'
@@ -51,11 +53,9 @@ const StackTicket = () => {
 const StackAccount = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen
-        options={{ headerShown: false }}
-        name='Stack-My Account'
-        component={MyAccount}
-      />
+      <Stack.Screen options={{ headerShown: true }} name="My Account" component={MyAccount} />
+      <Stack.Screen options={{ headerShown: true }} name="Garasi Saya" component={MyGarage} />
+      <Stack.Screen options={{ headerShown: true }} name="doi ini component maps" component={MapsMallCard} />
     </Stack.Navigator>
   );
 };
@@ -71,13 +71,13 @@ export default function App() {
               iconName = focused ? 'home' : 'home-outline';
             } else if (route.name === 'My Ticket') {
               iconName = focused ? 'document-text' : 'document-text-outline';
-            } else if (route.name === 'My Account') {
+            } else if (route.name === 'MyAccount') {
               iconName = focused ? 'person' : 'person-outline';
             }
             return <Ionicons name={iconName} size={size} color={color} />;
           },
-          tabBarActiveTintColor: 'orange',
-          tabBarInactiveTintColor: 'blue',
+          tabBarActiveTintColor: '#D9A14E',
+          tabBarInactiveTintColor: '#2F3B6E',
         })}
       >
         <Tab.Screen
@@ -91,8 +91,8 @@ export default function App() {
           component={StackTicket}
         />
         <Tab.Screen
-          options={{ headerShown: true }}
-          name='My Account'
+          options={{ headerShown: false }}
+          name='MyAccount'
           component={StackAccount}
         />
       </Tab.Navigator>

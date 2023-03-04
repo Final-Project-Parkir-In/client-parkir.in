@@ -1,6 +1,6 @@
 import * as React from "react";
 import { ScrollView, View, Text, Image } from "react-native";
-import { Button, List } from "react-native-paper";
+import { Button, List, Avatar } from "react-native-paper";
 
 export default function MallDetail({ navigation }) {
   const [expanded, setExpanded] = React.useState("chevron-down");
@@ -15,7 +15,7 @@ export default function MallDetail({ navigation }) {
             uri: "https://images.bisnis.com/posts/2019/02/28/894618/gandaria-city.jpg",
           }}
           className="w-full h-[200px]"
-        ></Image>
+        />
         <View className="bg-white rounded-t-3xl relative mt-[-16]">
           <View className="h-[180%] gap-2">
             <View className="gap-2 p-2">
@@ -25,8 +25,26 @@ export default function MallDetail({ navigation }) {
                 Prapatan, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta
                 12150
               </Text>
-              <Text className="text-xs">10:00 - 22:00</Text>
-              <Text className="text-xs">3.5 km</Text>
+              <View className="flex flex-row justify-between items-center px-1">
+                <View className="flex flex-row items-center">
+                  <Avatar.Icon
+                    size={24}
+                    color="black"
+                    icon="clock-outline"
+                    className="bg-transparent"
+                  />
+                  <Text className="text-xs">10:00 - 22:00</Text>
+                </View>
+                <View className="flex flex-row items-center">
+                  <Avatar.Icon
+                    size={24}
+                    color="black"
+                    icon="map-marker-radius-outline"
+                    className="bg-transparent"
+                  />
+                  <Text className="text-xs">3.5 km</Text>
+                </View>
+              </View>
             </View>
             <View className="p-4 h-fit bg-slate-100">
               <View className="flex flex-row justify-between">
@@ -44,9 +62,15 @@ export default function MallDetail({ navigation }) {
                 className="bg-white"
               >
                 <View className="gap-2 px-4">
-                  <Text className="text-xs">1. User hanya dapat booking untuk maksimal 2 jam kedepan</Text>
-                  <Text className="text-xs">2. User tidak dapat membatalkan booking</Text>
-                  <Text className="text-xs">3. Aplikasi Parkir.In blablabla, belum termasuk </Text>
+                  <Text className="text-xs">
+                    1. User hanya dapat booking untuk maksimal 2 jam kedepan
+                  </Text>
+                  <Text className="text-xs">
+                    2. User tidak dapat membatalkan booking
+                  </Text>
+                  <Text className="text-xs">
+                    3. Aplikasi Parkir.In blablabla, belum termasuk{" "}
+                  </Text>
                   <Text className="text-xs">4. Lorem ipsum blabla blabla</Text>
                 </View>
               </List.Accordion>
@@ -60,9 +84,15 @@ export default function MallDetail({ navigation }) {
                 className="bg-white"
               >
                 <View className="gap-2 mb-[120px] px-4">
-                  <Text className="text-xs">1. User hanya dapat booking untuk maksimal 2 jam kedepan</Text>
-                  <Text className="text-xs">2. User tidak dapat membatalkan booking</Text>
-                  <Text className="text-xs">3. Aplikasi Parkir.In blablabla, belum termasuk </Text>
+                  <Text className="text-xs">
+                    1. User hanya dapat booking untuk maksimal 2 jam kedepan
+                  </Text>
+                  <Text className="text-xs">
+                    2. User tidak dapat membatalkan booking
+                  </Text>
+                  <Text className="text-xs">
+                    3. Aplikasi Parkir.In blablabla, belum termasuk{" "}
+                  </Text>
                   <Text className="text-xs">4. Lorem ipsum blabla blabla</Text>
                 </View>
               </List.Accordion>
@@ -78,7 +108,7 @@ export default function MallDetail({ navigation }) {
           onPress={() => navigation.navigate("Parking Selection")}
           className="w-80 mb-10 bg-[#2F3B6E] rounded-xl"
         >
-          Pesan
+          Lanjutkan
         </Button>
       </View>
     </View>

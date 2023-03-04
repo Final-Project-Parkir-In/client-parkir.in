@@ -9,7 +9,7 @@ export default function MallList({ navigation }) {
   // console.log(searchQuery);
 
   return (
-    <ScrollView>
+    <View className="bg-white">
       <Searchbar
         placeholder="Cari Lokasi Parkir"
         onChangeText={onChangeSearch}
@@ -30,10 +30,12 @@ export default function MallList({ navigation }) {
           Petunjuk
         </Button>
       </View>
-
-      <MallListCard navigation={navigation} />
-      <MallListCard navigation={navigation} />
-      <MallListCard navigation={navigation} />
-    </ScrollView>
+      <ScrollView className="h-screen">
+        <MallListCard navigation={navigation} />
+        <MallListCard navigation={navigation} />
+        <MallListCard navigation={navigation} />
+        <MallListCard navigation={navigation} />
+      </ScrollView>
+    </View>
   );
 }

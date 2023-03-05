@@ -22,7 +22,7 @@ export default function Home({ navigation }) {
             <View className="w-[180px] h-[180px] bg-white justify-center items-center rounded-full">
               <Image
                 source={require("../assets/assets_1.jpg")}
-                className="w-full h-full scale-75 rounded-[40%]"
+                className="w-full h-full scale-75"
               />
             </View>
             <Text className="text-center">Find Parkir.In Nearby</Text>
@@ -37,7 +37,7 @@ export default function Home({ navigation }) {
             <View className="w-[180px] h-[180px] bg-white justify-center items-center rounded-full">
               <Image
                 source={require("../assets/assets_2.jpeg")}
-                className="w-full h-full scale-75 rounded-[40%]"
+                className="w-full h-full scale-75"
               />
             </View>
             <Text className="text-center">Find Parkir.In Mall List</Text>

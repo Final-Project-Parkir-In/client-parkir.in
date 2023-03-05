@@ -1,9 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import MapView, { Marker, Polyline } from 'react-native-maps';
-import { Platform, Text, View, StyleSheet, Image } from 'react-native';
+import {
+  Platform,
+  Text,
+  View,
+  StyleSheet,
+  Image,
+  Dimensions,
+} from 'react-native';
 import * as Location from 'expo-location';
 import Loader from '../components/Loader';
 import getDirections from '../helpers/getCoordinateMap';
+import axios from 'axios';
+import MallPosition from '../components/MallPosition';
+import MapsMallCard from '../components/MapsMallCard';
+import BottomSheetMap from '../components/BottomSheetMap';
 
 export default function App() {
   const [location, setLocation] = useState(null);
@@ -18,7 +29,8 @@ export default function App() {
   });
   const [coords, setCoords] = useState([]);
   const [errorMsg, setErrorMsg] = useState(null);
-
+  const [isLoadingMall, setIsLoadingMall] = useState(false);
+  const [malls, setMalls] = useState([]);
   useEffect(() => {
     (async () => {
       setIsLoading(true);
@@ -37,23 +49,41 @@ export default function App() {
       });
       setIsLoading(false);
     })();
+    // (async () => {
+    //   try {
+    //     setIsLoadingCoords(true);
+    //     const coords = await getDirections(
+    //       `${coordinat.latitude},${coordinat.longitude}`,
+    //       '-6.2860716972525985,106.74918377771974' // bakalan dari db
+    //     );
+    //     setCoords(coords);
+    //     setIsLoadingCoords(false);
+    //   } catch (err) {
+    //     setErrorMsg(err);
+    //     setIsLoadingCoords(false);
+    //   }
+    // })();
     (async () => {
       try {
-        setIsLoadingCoords(true);
-        const coords = await getDirections(
-          `${coordinat.latitude},${coordinat.longitude}`,
-          '-6.2860716972525985,106.74918377771974' // bakalan dari db
+        setIsLoadingMall(true);
+        const { data } = await axios.get(
+          'https://96e9-103-235-32-116.ap.ngrok.io/malls'
         );
-        setCoords(coords);
-        setIsLoadingCoords(false);
+        setMalls(data);
+        setIsLoadingMall(false);
       } catch (err) {
-        setErrorMsg(err);
-        setIsLoadingCoords(false);
+        console.log(err);
+        setIsLoadingMall(false);
       }
     })();
   }, []);
+  const windowHeight = Dimensions.get('window').height;
+  console.log(windowHeight, 'ini height');
 
   if (isLoading) {
+    return <Loader />;
+  }
+  if (isLoadingMall) {
     return <Loader />;
   }
   if (isLoadingCoords) {
@@ -62,12 +92,12 @@ export default function App() {
   if (errorMsg) {
     return <Text>{errorMsg}</Text>;
   }
-  console.log(coords);
-  
+  // console.log(+malls[0]?.long, 'longtitude', +malls[0]?.lat);
+  console.log(malls);
   return (
     <View style={styles.container}>
       <MapView
-        style={styles.map}
+        className='w-full h-[80%]'
         initialRegion={{
           latitude: coordinat.latitude,
           longitude: coordinat.longitude,
@@ -80,9 +110,12 @@ export default function App() {
             latitude: -6.2860716972525985, // bakalan lokasi dari mall fetch data ya
             longitude: 106.74918377771974, // bakalan lokasi dari mall fetch data ya
           }}
+          pinColor={'blue'}
         />
-        {coords.length > 0 && <Polyline coordinates={coords} />}
-        <Marker coordinate={coordinat} pinColor={'green'} />
+        <Marker coordinate={coordinat} />
+        {malls?.map((el, i) => {
+          return <MallPosition key={'map-key' + i} {...el} />;
+        })}
       </MapView>
     </View>
   );
@@ -91,9 +124,5 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  map: {
-    width: '100%',
-    height: '100%',
   },
 });

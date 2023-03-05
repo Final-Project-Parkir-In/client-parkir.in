@@ -23,6 +23,7 @@ export default function MyAccount({ navigation }) {
         <View className="my-8 h-fit ">
           <TouchableOpacity
             className="h-fit my-2 flex flex-row items-center justify-between"
+            onPress={() => console.log("belom kehandle")}
           >
             <View className="flex flex-row items-center">
               <Avatar.Icon

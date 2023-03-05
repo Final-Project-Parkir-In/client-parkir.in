@@ -6,6 +6,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
+import Login from './screens/Login';
+import Register from './screens/Register';
+import InputCar from './screens/InputCar';
 import Home from './screens/Home';
 import MyTicket from './screens/MyTicket';
 import MyAccount from './screens/MyAccount';
@@ -24,6 +27,16 @@ import MapBottomSheetTr from './screens/MapBottomSheetTr';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
+
+const StackLogin = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen options={{ headerShown: false }} name="Login" component={Login} />
+      <Stack.Screen options={{ headerShown: false }} name="Register" component={Register} />
+      <Stack.Screen options={{ headerShown: false }} name="Input Car" component={InputCar} />
+    </Stack.Navigator>
+  )
+}
 
 const StackHome = () => {
   return (
@@ -112,7 +125,7 @@ export default function App() {
               iconName = focused ? 'home' : 'home-outline';
             } else if (route.name === 'My Ticket') {
               iconName = focused ? 'document-text' : 'document-text-outline';
-            } else if (route.name === 'MyAccount') {
+            } else if (route.name === 'My Account') {
               iconName = focused ? 'person' : 'person-outline';
             }
             return <Ionicons name={iconName} size={size} color={color} />;
@@ -121,6 +134,12 @@ export default function App() {
           tabBarInactiveTintColor: '#2F3B6E',
         })}
       >
+        <Tab.Screen
+          options={{ headerShown: false }}
+          name='Test'
+          component={StackLogin}
+        />
+
         <Tab.Screen
           options={{ headerShown: false }}
           name='Home'
@@ -133,7 +152,7 @@ export default function App() {
         />
         <Tab.Screen
           options={{ headerShown: false }}
-          name='MyAccount'
+          name='My Account'
           component={StackAccount}
         />
       </Tab.Navigator>

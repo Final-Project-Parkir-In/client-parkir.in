@@ -1,7 +1,5 @@
+import { useEffect } from 'react';
 import { ScrollView, View, Text, Image, TouchableOpacity } from 'react-native';
-import { Card } from 'react-native-paper';
-import BannerSlider from '../components/BannerSlider';
-
 export default function Home({ navigation }) {
   return (
     <ScrollView className='h-screen'>
@@ -21,8 +19,8 @@ export default function Home({ navigation }) {
           >
             <View className='w-[180px] h-[180px] bg-white justify-center items-center '>
               <Image
-                source={require("../assets/assets_1.jpg")}
-                className="w-full h-full scale-75"
+                source={require('../assets/assets_1.jpg')}
+                className='w-full h-full scale-75'
               />
             </View>
             <Text className='text-center'>Find Parkir.In Nearby</Text>
@@ -36,8 +34,8 @@ export default function Home({ navigation }) {
           >
             <View className='w-[180px] h-[180px] bg-white justify-center items-center '>
               <Image
-                source={require("../assets/assets_2.jpeg")}
-                className="w-full h-full scale-75"
+                source={require('../assets/assets_2.jpeg')}
+                className='w-full h-full scale-75'
               />
             </View>
             <Text className='text-center'>Find Parkir.In Mall List</Text>

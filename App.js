@@ -18,8 +18,9 @@ import ParkingSelection from './screens/ParkingSelection';
 import PaymentPage from './screens/PaymentPage';
 import BookingPage from './views/BookingPage';
 import MyGarage from './screens/MyGarage';
+import MallListCard from './components/MallListCard';
 import MapsMallCard from './components/MapsMallCard';
-
+import MapBottomSheetTr from './screens/MapBottomSheetTr';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -27,12 +28,36 @@ const Tab = createBottomTabNavigator();
 const StackHome = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen options={{ headerShown: false }} name="Stack-Home" component={Home} />
-      <Stack.Screen options={{ headerShown: true }} name="Parkir.In locations" component={MapScreen} />
-      <Stack.Screen options={{ headerShown: true }} name="Mall List" component={MallList} />
-      <Stack.Screen options={{ headerShown: true }} name="Mall Detail" component={MallDetail} />
-      <Stack.Screen options={{ headerShown: false }} name="Parking Selection" component={ParkingSelection} />
-      <Stack.Screen options={{ headerShown: true }} name="Payment Page" component={PaymentScreens} />
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name='Stack-Home'
+        component={Home}
+      />
+      <Stack.Screen
+        options={{ headerShown: true }}
+        name='Parkir.In locations'
+        component={MapBottomSheetTr}
+      />
+      <Stack.Screen
+        options={{ headerShown: true }}
+        name='Mall List'
+        component={MallList}
+      />
+      <Stack.Screen
+        options={{ headerShown: true }}
+        name='Mall Detail'
+        component={MallDetail}
+      />
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name='Parking Selection'
+        component={ParkingSelection}
+      />
+      <Stack.Screen
+        options={{ headerShown: true }}
+        name='Payment Page'
+        component={PaymentScreens}
+      />
     </Stack.Navigator>
   );
 };
@@ -40,7 +65,11 @@ const StackHome = () => {
 const StackTicket = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen options={{ headerShown: false }} name="E-Tiket" component={BookingPage} />
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name='E-Tiket'
+        component={BookingPage}
+      />
       <Stack.Screen
         options={{ headerShown: false }}
         name='Stack-My Ticket'
@@ -53,9 +82,21 @@ const StackTicket = () => {
 const StackAccount = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen options={{ headerShown: true }} name="My Account" component={MyAccount} />
-      <Stack.Screen options={{ headerShown: true }} name="Garasi Saya" component={MyGarage} />
-      <Stack.Screen options={{ headerShown: true }} name="doi ini component maps" component={MapsMallCard} />
+      <Stack.Screen
+        options={{ headerShown: true }}
+        name='My Account'
+        component={MyAccount}
+      />
+      <Stack.Screen
+        options={{ headerShown: true }}
+        name='Garasi Saya'
+        component={MyGarage}
+      />
+      {/* <Stack.Screen
+        options={{ headerShown: true }}
+        name='doi ini component maps'
+        component={MapsMallCard}
+      /> */}
     </Stack.Navigator>
   );
 };
@@ -106,6 +147,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    alignContent: 'center'
+    alignContent: 'center',
   },
 });

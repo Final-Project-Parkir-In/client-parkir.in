@@ -1,12 +1,13 @@
 import { View, ScrollView, Text, TouchableOpacity } from "react-native";
 import { Avatar } from "react-native-paper";
 import SpecifiedView from "../components/SpecifiedView";
+import GarageCarCard from "../components/GarageCarCard";
 
 export default function MyGarage() {
   return (
     <SpecifiedView className="bg-white">
-      <ScrollView className="h-full p-6 gap-y-4">
-        <TouchableOpacity className="border border-slate-400 h-28 px-2 flex flex-row items-center rounded-xl">
+      <ScrollView className="h-full p-6 ">
+        {/* <TouchableOpacity className="border border-slate-400 h-28 px-2 flex flex-row items-center rounded-xl">
           <View className="bborder w-[25%] h-[75%] justify-center items-center">
             <Avatar.Icon
               size={70}
@@ -62,8 +63,12 @@ export default function MyGarage() {
               className=" bg-white"
             />
           </View>
-        </TouchableOpacity>
-
+        </TouchableOpacity> */}
+        
+        <GarageCarCard />
+        <GarageCarCard />
+        <GarageCarCard />
+        <GarageCarCard />
       </ScrollView>
     </SpecifiedView>
   );

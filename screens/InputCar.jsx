@@ -58,7 +58,8 @@ export default function InputCar({ navigation }) {
               mode="contained"
               className="bg-[#2F3B6E] w-[15vh]"
               onPress={() =>
-                alert("Jalankan function register & create new car!")
+                // alert("Jalankan function register & create new car!")
+                navigation.navigate("Login")
               }
             >
               Register

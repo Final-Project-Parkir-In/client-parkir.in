@@ -96,7 +96,7 @@ const StackAccount = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        options={{ headerShown: true }}
+        options={{ headerShown: false }}
         name='My Account'
         component={MyAccount}
       />

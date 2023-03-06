@@ -1,7 +1,14 @@
-import { ScrollView, View, Text, Pressable } from "react-native";
+import {
+  ScrollView,
+  View,
+  Text,
+  Pressable,
+  TouchableOpacity,
+} from "react-native";
 import { Button, Badge } from "react-native-paper";
 import React from "react";
 import SpecifiedView from "../components/SpecifiedView";
+import ParkingSpot from "../components/ParkingSpot";
 
 export default function ParkingSelection({ navigation }) {
   return (
@@ -15,15 +22,12 @@ export default function ParkingSelection({ navigation }) {
             <Text className="text-base">Select your parking spot</Text>
           </View>
           <View className="mt-10 p-4 w-[90%] flex flex-row flex-wrap justify-center rounded-xl bg-white shadow-2xl">
-            <Pressable
-              className="w-20 h-20 m-2 rounded-xl bg-amber-100 shadow-lg"
-              onPress={() => console.log("wlwl")}
-            ></Pressable>
-            <View className="w-20 h-20 m-2 rounded-xl bg-amber-100 shadow-lg"></View>
-            <View className="w-20 h-20 m-2 rounded-xl bg-amber-100 shadow-lg"></View>
-            <View className="w-20 h-20 m-2 rounded-xl bg-amber-100 shadow-lg"></View>
-            <View className="w-20 h-20 m-2 rounded-xl bg-amber-100 shadow-lg"></View>
-            <View className="w-20 h-20 m-2 rounded-xl bg-amber-100 shadow-lg"></View>
+            <ParkingSpot />
+            <ParkingSpot />
+            <ParkingSpot />
+            <ParkingSpot />
+            <ParkingSpot />
+            <ParkingSpot />
           </View>
 
           <View className="flex flex-row items-center p-4 mt-8">

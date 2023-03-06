@@ -13,7 +13,7 @@ export default function Login({ navigation }) {
   const [email, setEmail] = useState('');
   const dispatch = useDispatch();
   const [password, setPassword] = useState('');
-  const [loginUser, { isLoading, isError, data, isSuccess }] =
+  const [loginUser, { isLoading, isError, data, isSuccess, error }] =
     useLoginUserMutation();
   const storeData = async (value) => {
     try {
@@ -35,7 +35,7 @@ export default function Login({ navigation }) {
     return <Loader />;
   }
   if (isError) {
-    return <ErrorScreen />;
+    dispatch(takeToken({ token: '' }));
   }
   if (isSuccess) {
     storeData(data.access_token);

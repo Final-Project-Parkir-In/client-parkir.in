@@ -9,8 +9,11 @@ import ErrorScreen from './ErrorScreen';
 export default function MallDetail({ navigation }) {
   const [expanded, setExpanded] = React.useState('chevron-down');
   const handlePress = () => setExpanded('chevron-up');
-  const { idMall } = useSelector((state) => state.parkirInSlice);
-  const { data, isLoading, isError } = useGetMallByIdQuery(idMall);
+  const { idMall, token } = useSelector((state) => state.parkirInSlice);
+  const { data, isLoading, isError, error } = useGetMallByIdQuery({
+    id: idMall,
+    token,
+  });
 
   if (isLoading) {
     return <Loader />;

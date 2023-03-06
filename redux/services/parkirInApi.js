@@ -26,19 +26,70 @@ export const parkirInApi = createApi({
     }),
     // endpoint ambil semua malls
     getAllMalls: builder.query({
-      query: () => '/malls',
+      query: (token) => ({
+        url: '/malls',
+        method: 'get',
+        headers: {
+          access_token: token,
+        },
+      }),
     }),
     // enpoint mall berdasarkan id
     getMallById: builder.query({
-      query: (id) => '/malls/' + id,
+      query: ({ id, token }) => ({
+        url: '/malls/' + id,
+        method: 'get',
+        headers: {
+          access_token: token,
+        },
+      }),
     }),
     // endpoint untuk mendapatkan semua spot parkir berdasarkan mall id
     getParkingSpot: builder.query({
-      query: (mallId) => '/spots/' + mallId,
+      query: ({ idMall, token }) => ({
+        url: '/spots/' + idMall,
+        method: 'get',
+        headers: {
+          access_token: token,
+        },
+      }),
     }),
     // query untuk bayar
     paySpot: builder.query({
-      query: (parkingTransactionId) => '/checkOut/' + parkingTransactionId,
+      query: ({ parkingTransactionId, token }) => ({
+        url: '/checkOut/' + parkingTransactionId,
+        method: 'get',
+        headers: {
+          access_token: token,
+        },
+      }),
+    }),
+
+    postBookingSpot: builder.mutation({
+      query: ({ parkingId, token }) => ({
+        url: '/bookings/' + parkingId,
+        method: 'post',
+        headers: {
+          access_token: token,
+        },
+      }),
+    }),
+    getInfoBooking: builder.query({
+      query: ({ transactionId, token }) => ({
+        url: '/tickets/' + transactionId,
+        headers: {
+          access_token: token,
+        },
+      }),
+    }),
+    // enpoint untuk ambil semua tikets
+    getAllTickets: builder.query({
+      query: ({ token }) => ({
+        url: '/getAllTickets',
+        headers: {
+          access_token: token,
+        },
+      }),
     }),
   }),
 });
@@ -49,4 +100,7 @@ export const {
   useLoginUserMutation,
   useRegisterUserMutation,
   useGetParkingSpotQuery,
+  useGetAllTicketsQuery,
+  usePostBookingSpotMutation,
+  useGetInfoBookingQuery,
 } = parkirInApi;

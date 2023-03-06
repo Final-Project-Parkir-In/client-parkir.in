@@ -8,13 +8,15 @@ import ErrorScreen from './ErrorScreen';
 import { useSelector } from 'react-redux';
 
 export default function PaymentScreens() {
-  const { parkingTransactionId } = useSelector((state) => state.parkirInSlice);
+  const { parkingTransactionId, token } = useSelector(
+    (state) => state.parkirInSlice
+  );
   const {
     data: transactions,
     isLoading,
     isError,
     error,
-  } = usePaySpotQuery(parkingTransactionId); // akan berdasrkan parking spot id
+  } = usePaySpotQuery({ parkingTransactionId, token }); // akan berdasrkan parking spot id
   if (isLoading) {
     return <Loader />;
   }

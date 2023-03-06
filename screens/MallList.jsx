@@ -15,6 +15,7 @@ export default function MallList({ navigation }) {
   if (isLoading) {
     return <Loader />;
   }
+  console.log(malls);
   if (isError) {
     console.log(error);
     return <ErrorScreen />;

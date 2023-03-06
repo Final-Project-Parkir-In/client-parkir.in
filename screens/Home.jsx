@@ -1,6 +1,23 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { ScrollView, View, Text, Image, TouchableOpacity } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 export default function Home({ navigation }) {
+  const [token, setToken] = useState('');
+  const getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('access_token');
+      setToken(value);
+      console.log(value, '<===');
+      if (value !== null) {
+        // value previously stored
+      }
+    } catch (e) {
+      // error reading value
+    }
+  };
+  useEffect(() => {
+    getData();
+  }, []);
   return (
     <ScrollView className='h-screen'>
       <View className='h-[50vh] bg-[#2F3B6E]'>

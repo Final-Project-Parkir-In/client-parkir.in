@@ -2,6 +2,8 @@ import * as React from "react";
 import { View, Text, Image, ScrollView } from "react-native";
 import SpecifiedView from "../components/SpecifiedView";
 import { TextInput, Button } from "react-native-paper";
+import { useDispatch } from "react-redux";
+import { useRegisterUserMutation } from "../redux/services/parkirInApi";
 
 export default function Register({ navigation }) {
   const [name, setName] = React.useState("");
@@ -9,6 +11,18 @@ export default function Register({ navigation }) {
   const [password, setPassword] = React.useState("");
   const [phoneNumber, setPhoneNumber] = React.useState("");
   console.log(name, email, password, phoneNumber);
+  const dispatch = useDispatch();
+
+  const [registerUser, { isLoading, isError, data, isSuccess }] =
+    useRegisterUserMutation();
+
+  const handleRegister = async () => {
+    try {
+      registerUser({ email, password });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <SpecifiedView className="bg-[#2F3B6E] p-4 h-screen">
@@ -62,7 +76,8 @@ export default function Register({ navigation }) {
               icon="account-check-outline"
               mode="contained"
               className="bg-[#2F3B6E] w-[15vh]"
-              onPress={() => navigation.navigate("Input Car")}
+              // onPress={() => navigation.navigate("Input Car")}
+              onPress={() => handleRegister()}
             >
               Register
             </Button>

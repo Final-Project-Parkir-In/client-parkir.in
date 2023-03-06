@@ -10,15 +10,13 @@ import Login from './screens/Login';
 import Register from './screens/Register';
 import InputCar from './screens/InputCar';
 import Home from './screens/Home';
-import MyTicket from './screens/MyTicket';
 import MyAccount from './screens/MyAccount';
 import MallList from './screens/MallList';
 import MallDetail from './screens/MallDetail';
 import BarcodeScreen from './screens/BarcodeScreen';
 import PaymentScreens from './screens/PaymentScreen';
 import ParkingSelection from './screens/ParkingSelection';
-import PaymentPage from './screens/PaymentPage';
-import BookingPage from './views/BookingPage';
+import BookingPage from './screens/BookingPage';
 import MyGarage from './screens/MyGarage';
 import MallListCard from './components/MallListCard';
 import MapsMallCard from './components/MapsMallCard';
@@ -28,6 +26,7 @@ import { store } from './app/store';
 import { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { takeToken } from './redux/slice/parkirInSlice';
+import DetailPage from './screens/DetailPage';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -62,8 +61,8 @@ const StackHome = () => {
       />
       <Stack.Screen
         options={{ headerShown: true }}
-        name='Payment Page'
-        component={PaymentScreens}
+        name='Ticket Detail'
+        component={DetailPage}
       />
     </Stack.Navigator>
   );
@@ -79,8 +78,8 @@ const StackTicket = () => {
       />
       <Stack.Screen
         options={{ headerShown: false }}
-        name='Stack-My Ticket'
-        component={MyTicket}
+        name='payment'
+        component={PaymentScreens}
       />
     </Stack.Navigator>
   );

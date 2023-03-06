@@ -1,28 +1,64 @@
-import { ScrollView, View, Text, Pressable } from 'react-native';
+import { ScrollView, View, Text, TouchableOpacity, Alert } from 'react-native';
 import { Button, Badge } from 'react-native-paper';
-import React from 'react';
+import { nanoid } from '@reduxjs/toolkit';
+import React, { useEffect, useState } from 'react';
 import SpecifiedView from '../components/SpecifiedView';
-import { useSelector } from 'react-redux';
-import { useGetParkingSpotQuery } from '../redux/services/parkirInApi';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  useGetParkingSpotQuery,
+  usePostBookingSpotMutation,
+} from '../redux/services/parkirInApi';
 import Loader from '../components/Loader';
 import ErrorScreen from './ErrorScreen';
+import { getParkingTransactionId } from '../redux/slice/parkirInSlice';
 
 export default function ParkingSelection({ navigation }) {
-  const { idMall } = useSelector((state) => state.parkirInSlice);
+  const { idMall, token } = useSelector((state) => state.parkirInSlice);
+  const [spotData, setSpotData] = useState({});
+  const [selected, setSelected] = useState(0);
+  const dispatch = useDispatch();
+  // get parking spot data
   const {
     data: parkingSpots,
     isLoading,
     isError,
     error,
-  } = useGetParkingSpotQuery(idMall);
+    refetch,
+  } = useGetParkingSpotQuery({ idMall, token });
+  useEffect(() => {
+    refetch();
+  }, []);
+  const [
+    postBookingSpot,
+    { isLoading: postLoading, isError: postError, data, isSuccess },
+  ] = usePostBookingSpotMutation();
   if (isLoading) {
     return <Loader />;
   }
+  if (postLoading) {
+    return <Loader />;
+  }
+
   if (isError) {
-    console.log(err);
+    console.log(error);
     return <ErrorScreen />;
   }
-  console.log(parkingSpots, '<===');
+  if (postError) {
+    return <ErrorScreen />;
+  }
+  if (isSuccess) {
+    dispatch(getParkingTransactionId({ parkingTransactionId: data.id }));
+    // console.log(data, 'ini dat');
+  }
+
+  const handleBooking = () => {
+    if (spotData.isAvailable) {
+      postBookingSpot({ token, parkingId: spotData?.id });
+      navigation.navigate('My Ticket');
+    } else {
+      alert('spot udah di booking');
+    }
+  };
   return (
     <SpecifiedView style={{ flex: 1 }} className='bg-[#D9A14E]'>
       <ScrollView>
@@ -35,14 +71,26 @@ export default function ParkingSelection({ navigation }) {
           </View>
           <View className='mt-10 p-4 w-[90%] flex flex-row flex-wrap justify-center rounded-xl bg-white shadow-2xl'>
             {parkingSpots.map((el, i) => {
+              let selectedSpot = '';
+              if (el.id === selected) {
+                selectedSpot = 'border border-2';
+              }
               return (
-                <View
+                <TouchableOpacity
+                  key={el.id + '-id-park'}
                   className={
                     el.isAvailable
-                      ? 'w-20 h-20 m-2 rounded-xl bg-slate-400 shadow-lg'
-                      : 'w-20 h-20 m-2 rounded-xl bg-amber-100 shadow-lg'
+                      ? `w-20 h-20 m-2 rounded-xl bg-amber-100 shadow-lg` +
+                        selectedSpot
+                      : 'w-20 h-20 m-2 rounded-xl bg-slate-400 shadow-lg '
                   }
-                ></View>
+                  onPress={() => {
+                    setSelected(el.id);
+                    setSpotData({ ...el });
+                  }}
+                >
+                  <Text>{el.spot}</Text>
+                </TouchableOpacity>
               );
             })}
           </View>
@@ -71,7 +119,9 @@ export default function ParkingSelection({ navigation }) {
         </View>
         <Button
           mode='contained'
-          onPress={() => navigation.navigate('Payment Page')}
+          onPress={() => {
+            handleBooking();
+          }}
           className='w-80 mb-10 mt-4 bg-[#2F3B6E] rounded-xl'
         >
           Booking

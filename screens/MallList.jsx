@@ -5,17 +5,18 @@ import Loader from '../components/Loader';
 import MallListCard from '../components/MallListCard';
 import { useGetAllMallsQuery } from '../redux/services/parkirInApi';
 import ErrorScreen from './ErrorScreen';
+import { useSelector } from 'react-redux';
 
 export default function MallList({ navigation }) {
+  const { token } = useSelector((state) => state.parkirInSlice);
   const [searchQuery, setSearchQuery] = React.useState('');
   const onChangeSearch = (query) => setSearchQuery(query);
   // get all malls query from rtk
-  const { data: malls, isLoading, error, isError } = useGetAllMallsQuery();
-
+  const { data: malls, isLoading, error, isError } = useGetAllMallsQuery(token);
   if (isLoading) {
     return <Loader />;
   }
-  console.log(malls);
+
   if (isError) {
     console.log(error);
     return <ErrorScreen />;

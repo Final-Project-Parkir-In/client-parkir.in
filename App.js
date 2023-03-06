@@ -14,6 +14,7 @@ import MyTicket from './screens/MyTicket';
 import MyAccount from './screens/MyAccount';
 import MallList from './screens/MallList';
 import MallDetail from './screens/MallDetail';
+import DetailPage from './screens/Detail';
 import BarcodeScreen from './screens/BarcodeScreen';
 import PaymentScreens from './screens/PaymentScreen';
 import ParkingSelection from './screens/ParkingSelection';
@@ -101,6 +102,7 @@ const StackTicket = () => {
         name='Stack-My Ticket'
         component={MyTicket}
       />
+      <Stack.Screen options={{headerShown: false}} name='Detail Ticket' component={DetailPage}/>
     </Stack.Navigator>
   );
 };

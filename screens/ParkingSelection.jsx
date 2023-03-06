@@ -1,4 +1,4 @@
-import { ScrollView, View, Text, Pressable } from 'react-native';
+import { ScrollView, View, Text, Pressable, TouchableOpacity } from 'react-native';
 import { Button, Badge } from 'react-native-paper';
 import React from 'react';
 import SpecifiedView from '../components/SpecifiedView';
@@ -15,14 +15,28 @@ export default function ParkingSelection({ navigation }) {
     isError,
     error,
   } = useGetParkingSpotQuery(idMall);
+
+  const [isSelected, setIsSelected] = React.useState();
+
+  const handleSelect = () => {
+    if (isSelected == true) {
+      setIsSelected("w-20 h-20 m-2 rounded-xl bg-amber-100 shadow-lg justify-center items-center border");
+    } else {
+      setIsSelected("w-20 h-20 m-2 rounded-xl bg-amber-100 shadow-lg justify-center items-center");
+    }
+  };
+
   if (isLoading) {
     return <Loader />;
   }
+
   if (isError) {
     console.log(err);
     return <ErrorScreen />;
   }
+
   console.log(parkingSpots, '<===');
+
   return (
     <SpecifiedView style={{ flex: 1 }} className='bg-[#D9A14E]'>
       <ScrollView>
@@ -36,13 +50,18 @@ export default function ParkingSelection({ navigation }) {
           <View className='mt-10 p-4 w-[90%] flex flex-row flex-wrap justify-center rounded-xl bg-white shadow-2xl'>
             {parkingSpots.map((el, i) => {
               return (
-                <View
+                <TouchableOpacity
+                  key={i}
                   className={
                     el.isAvailable
-                      ? 'w-20 h-20 m-2 rounded-xl bg-slate-400 shadow-lg'
-                      : 'w-20 h-20 m-2 rounded-xl bg-amber-100 shadow-lg'
+                      ? 'w-20 h-20 m-2 rounded-xl bg-amber-100 shadow-lg justify-center items-center'
+                      : 'w-20 h-20 m-2 rounded-xl bg-slate-400 shadow-lg justify-center items-center'
                   }
-                ></View>
+                >
+                  <Text className="text-xl font-bold text-[#2F3B6E]">
+                    {el.spot}
+                  </Text>
+                </TouchableOpacity>
               );
             })}
           </View>

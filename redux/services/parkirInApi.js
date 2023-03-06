@@ -1,10 +1,9 @@
 // Need to use the React-specific entry point to import createApi
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-
 export const parkirInApi = createApi({
   reducerPath: 'parkirInApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://009b-180-252-169-15.ap.ngrok.io',
+    baseUrl: 'https://4493-139-228-111-126.ap.ngrok.io',
   }),
   endpoints: (builder) => ({
     // endpoint untuk user register
@@ -13,7 +12,7 @@ export const parkirInApi = createApi({
         url: '/register',
         method: 'post',
         // user data harus {email:'uus',password:'uuw',etc}
-        data: userData,
+        body: userData,
       }),
     }),
     // endpoint untuk login
@@ -22,7 +21,7 @@ export const parkirInApi = createApi({
         url: '/login',
         method: 'post',
         // user data harus {email:'uus',password:'uuw'}
-        data: userData,
+        body: userData,
       }),
     }),
     // endpoint ambil semua malls

@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, Image, StyleSheet } from "react-native";
+import { View, Text, ScrollView, Image, StyleSheet, Pressable } from "react-native";
 import DropDownItem from 'react-native-drop-down-item';
 
 
@@ -67,7 +67,9 @@ const DetailPage = () => {
                         </View>
                     </View>
                 </View>
-                <View style={{ backgroundColor: '#fff', marginTop: 10, borderRadius: 10, width: '90%', alignItems: 'center' }}>
+
+                {/* Rincian Pemabayaran */}
+                {/* <View style={{ backgroundColor: '#fff', marginTop: 10, borderRadius: 10, width: '90%', alignItems: 'center' }}>
                     <View style={style.cardTextDate}>
                         <View style={{ alignItems: 'center', margin: 5, padding: 5}}>
                             <Text style={{ fontWeight: '700', fontSize: 15 }}>Rincian Pembayaran</Text>
@@ -101,7 +103,9 @@ const DetailPage = () => {
                             </View>
                         </View>
                     </View>
-                </View>
+                </View> */}
+                {/* Rincian Pemabayaran */}
+
 
                 {/* QR Image */}
                 <View style={{ justifyContent: 'center', alignItems: 'center', width: "50%", height: 200, marginTop: 20, backgroundColor: "#fff", borderRadius: 20, marginBottom: 20 }}>
@@ -140,6 +144,10 @@ const DetailPage = () => {
                     )
                 })}
                 {/* Dropdown */}
+
+                <Pressable style={{width: '50%', backgroundColor: 'blue', height: 30, marginBottom: 20, alignItems: 'center', justifyContent: 'center', borderRadius: 30}}>
+                    <Text style={{fontSize: 18, color: 'white', fontWeight: '700'}}>CHECK OUT</Text>
+                </Pressable>
 
             </View>
         </ScrollView>

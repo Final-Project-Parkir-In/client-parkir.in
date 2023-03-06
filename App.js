@@ -13,7 +13,6 @@ import Home from './screens/Home';
 import MyTicket from './screens/MyTicket';
 import MyAccount from './screens/MyAccount';
 import MallList from './screens/MallList';
-import MapScreen from './screens/MapScreen';
 import MallDetail from './screens/MallDetail';
 import BarcodeScreen from './screens/BarcodeScreen';
 import PaymentScreens from './screens/PaymentScreen';
@@ -23,7 +22,9 @@ import BookingPage from './views/BookingPage';
 import MyGarage from './screens/MyGarage';
 import MallListCard from './components/MallListCard';
 import MapsMallCard from './components/MapsMallCard';
-import MapBottomSheetTr from './screens/MapBottomSheetTr';
+import MapBottomSheetTr from './screens/MapScreen';
+import { Provider } from 'react-redux';
+import { store } from './app/store';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -31,12 +32,24 @@ const Tab = createBottomTabNavigator();
 const StackLogin = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen options={{ headerShown: false }} name="Login" component={Login} />
-      <Stack.Screen options={{ headerShown: false }} name="Register" component={Register} />
-      <Stack.Screen options={{ headerShown: false }} name="Input Car" component={InputCar} />
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name='Login'
+        component={Login}
+      />
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name='Register'
+        component={Register}
+      />
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name='Input Car'
+        component={InputCar}
+      />
     </Stack.Navigator>
-  )
-}
+  );
+};
 
 const StackHome = () => {
   return (
@@ -116,47 +129,49 @@ const StackAccount = () => {
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Tab.Navigator
-        screenOptions={({ route }) => ({
-          tabBarIcon: ({ focused, color, size }) => {
-            let iconName;
-            if (route.name === 'Home') {
-              iconName = focused ? 'home' : 'home-outline';
-            } else if (route.name === 'My Ticket') {
-              iconName = focused ? 'document-text' : 'document-text-outline';
-            } else if (route.name === 'My Account') {
-              iconName = focused ? 'person' : 'person-outline';
-            }
-            return <Ionicons name={iconName} size={size} color={color} />;
-          },
-          tabBarActiveTintColor: '#D9A14E',
-          tabBarInactiveTintColor: '#2F3B6E',
-        })}
-      >
-        <Tab.Screen
-          options={{ headerShown: false }}
-          name='Test'
-          component={StackLogin}
-        />
+    <Provider store={store}>
+      <NavigationContainer>
+        <Tab.Navigator
+          screenOptions={({ route }) => ({
+            tabBarIcon: ({ focused, color, size }) => {
+              let iconName;
+              if (route.name === 'Home') {
+                iconName = focused ? 'home' : 'home-outline';
+              } else if (route.name === 'My Ticket') {
+                iconName = focused ? 'document-text' : 'document-text-outline';
+              } else if (route.name === 'My Account') {
+                iconName = focused ? 'person' : 'person-outline';
+              }
+              return <Ionicons name={iconName} size={size} color={color} />;
+            },
+            tabBarActiveTintColor: '#D9A14E',
+            tabBarInactiveTintColor: '#2F3B6E',
+          })}
+        >
+          <Tab.Screen
+            options={{ headerShown: false }}
+            name='Test'
+            component={StackLogin}
+          />
 
-        <Tab.Screen
-          options={{ headerShown: false }}
-          name='Home'
-          component={StackHome}
-        />
-        <Tab.Screen
-          options={{ headerShown: true }}
-          name='My Ticket'
-          component={StackTicket}
-        />
-        <Tab.Screen
-          options={{ headerShown: false }}
-          name='My Account'
-          component={StackAccount}
-        />
-      </Tab.Navigator>
-    </NavigationContainer>
+          <Tab.Screen
+            options={{ headerShown: false }}
+            name='Home'
+            component={StackHome}
+          />
+          <Tab.Screen
+            options={{ headerShown: true }}
+            name='My Ticket'
+            component={StackTicket}
+          />
+          <Tab.Screen
+            options={{ headerShown: false }}
+            name='My Account'
+            component={StackAccount}
+          />
+        </Tab.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 }
 

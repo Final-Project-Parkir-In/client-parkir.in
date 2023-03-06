@@ -11,6 +11,7 @@ import MyAccount from './screens/MyAccount';
 import MallList from './screens/MallList';
 import MapScreen from './screens/MapScreen';
 import MallDetail from './screens/MallDetail';
+import DetailPage from './screens/Detail';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -34,6 +35,7 @@ const StackTicket = () => {
         name='Stack-My Ticket'
         component={MyTicket}
       />
+      <Stack.Screen options={{headerShown: false}} name='Detail Ticket' component={DetailPage}/>
     </Stack.Navigator>
   );
 };

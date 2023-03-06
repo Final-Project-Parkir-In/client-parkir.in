@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const parkirInApi = createApi({
   reducerPath: 'parkirInApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://4493-139-228-111-126.ap.ngrok.io',
+    baseUrl: 'https://5aae-139-228-111-126.ap.ngrok.io',
   }),
   endpoints: (builder) => ({
     // endpoint untuk user register

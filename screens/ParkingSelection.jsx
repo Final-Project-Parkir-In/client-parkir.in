@@ -1,4 +1,4 @@
-import { ScrollView, View, Text, TouchableOpacity, Alert } from 'react-native';
+import { ScrollView, View, Text, Pressable, TouchableOpacity, Alert } from 'react-native';
 import { Button, Badge } from 'react-native-paper';
 import { nanoid } from '@reduxjs/toolkit';
 import React, { useEffect, useState } from 'react';
@@ -43,6 +43,7 @@ export default function ParkingSelection({ navigation }) {
     console.log(error);
     return <ErrorScreen />;
   }
+
   if (postError) {
     return <ErrorScreen />;
   }
@@ -59,6 +60,8 @@ export default function ParkingSelection({ navigation }) {
       alert('spot udah di booking');
     }
   };
+  console.log(parkingSpots, '<===');
+
   return (
     <SpecifiedView style={{ flex: 1 }} className='bg-[#D9A14E]'>
       <ScrollView>

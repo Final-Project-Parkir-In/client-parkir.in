@@ -8,16 +8,11 @@ const BarcodeScreen = () => {
   const [qrImg, setQrImg] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [errMsg, setErrMsg] = useState('');
-
-  useEffect(() => {
-    // generateQrCode('uhiiii');
-  }, []);
   if (isLoading) {
     return <Loader />;
   }
   return (
     <View>
-      {/* <Image source={{ uri: qrImg }} /> */}
       <QRCode
         value={JSON.stringify({
           user: 'ahzan',

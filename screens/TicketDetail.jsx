@@ -248,6 +248,7 @@ const style = StyleSheet.create({
   boxImgInfo: {
     width: '20%',
     alignItems: 'center',
+    marginBottom: 12
   },
   boxLokasiInfo: {
     width: '40%',
@@ -262,7 +263,7 @@ const style = StyleSheet.create({
   info: {
     width: '70%',
     padding: 7,
-    justifyContent: 'center',
+    justifyContent: 'start',
     alignItems: 'flex-start',
   },
   lokasiInfo: {

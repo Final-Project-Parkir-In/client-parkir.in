@@ -84,7 +84,6 @@ const BookingPage = ({ navigation }) => {
           </View>
         </View>
         {data?.map((el) => {
-          console.log(el, '<==');
           return (
             <Pressable
               onPress={() => navigation.navigate('Ticket Detail', el.id)}
@@ -100,8 +99,12 @@ const BookingPage = ({ navigation }) => {
                 />
               </View>
               <View style={style.boxProduct}>
-                <Text style={style.textTitleProduct}>{el.ParkingSlot.Mall.name}</Text>
-                <Text style={style.textProduct}>{el.ParkingSlot.Mall.address}</Text>
+                <Text style={style.textTitleProduct}>
+                  {el.ParkingSlot.Mall.name}
+                </Text>
+                <Text style={style.textProduct}>
+                  {el.ParkingSlot.Mall.address}
+                </Text>
                 <Text
                   style={{
                     color: '#c4c4c4',

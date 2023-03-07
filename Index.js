@@ -26,7 +26,7 @@ import { store } from './app/store';
 import { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { takeToken } from './redux/slice/parkirInSlice';
-import DetailPage from './screens/DetailPage';
+import DetailPage from './screens/TicketDetail';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();

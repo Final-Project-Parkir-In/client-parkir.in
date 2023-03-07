@@ -17,7 +17,6 @@ export default function MallDetail({ navigation }) {
   useEffect(() => {
     refetch();
   }, [idMall]);
-  console.log(data);
 
   if (isLoading) {
     return <Loader />;

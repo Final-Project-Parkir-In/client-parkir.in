@@ -14,7 +14,7 @@ export default function MyAccount({ navigation }) {
       console.log(err);
     }
   };
-  console.log('uhui');
+
   return (
     <SpecifiedView className='bg-white'>
       <ScrollView className='h-full p-6'>

@@ -20,7 +20,7 @@ import BookingPage from './screens/BookingPage';
 import MyGarage from './screens/MyGarage';
 import MallListCard from './components/MallListCard';
 import MapsMallCard from './components/MapsMallCard';
-import MapBottomSheetTr from './screens/MapScreen';
+import MapScreen from './screens/MapScreen';
 import { useDispatch, useSelector } from 'react-redux';
 import { store } from './app/store';
 import { useEffect, useState } from 'react';
@@ -42,7 +42,7 @@ const StackHome = () => {
       <Stack.Screen
         options={{ headerShown: true }}
         name='Parkir.In locations'
-        component={MapBottomSheetTr}
+        component={MapScreen}
       />
       <Stack.Screen
         options={{ headerShown: true }}
@@ -58,11 +58,6 @@ const StackHome = () => {
         options={{ headerShown: false }}
         name='Parking Selection'
         component={ParkingSelection}
-      />
-      <Stack.Screen
-        options={{ headerShown: true }}
-        name='Ticket Detail'
-        component={DetailPage}
       />
     </Stack.Navigator>
   );
@@ -80,6 +75,11 @@ const StackTicket = () => {
         options={{ headerShown: false }}
         name='payment'
         component={PaymentScreens}
+      />
+      <Stack.Screen
+        options={{ headerShown: true }}
+        name='Ticket Detail'
+        component={DetailPage}
       />
     </Stack.Navigator>
   );
@@ -150,7 +150,7 @@ export default function Index() {
                 iconName = focused ? 'home' : 'home-outline';
               } else if (route.name === 'My Ticket') {
                 iconName = focused ? 'document-text' : 'document-text-outline';
-              } else if (route.name === 'My Account') {
+              } else if (route.name === 'My-Account') {
                 iconName = focused ? 'person' : 'person-outline';
               }
               return <Ionicons name={iconName} size={size} color={color} />;
@@ -171,7 +171,7 @@ export default function Index() {
           />
           <Tab.Screen
             options={{ headerShown: false }}
-            name='My Account'
+            name='My-Account'
             component={StackAccount}
           />
         </Tab.Navigator>

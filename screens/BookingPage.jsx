@@ -7,7 +7,7 @@ import {
   Image,
   TextInput,
 } from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useGetAllTicketsQuery } from '../redux/services/parkirInApi';
 import { useSelector } from 'react-redux';
@@ -15,14 +15,24 @@ import Loader from '../components/Loader';
 import ErrorScreen from './ErrorScreen';
 const BookingPage = ({ navigation }) => {
   const [search, onChangeSearch] = React.useState('');
-  const { token } = useSelector((state) => state.parkirInSlice);
-  const { data, isLoading, isError } = useGetAllTicketsQuery({ token });
+  const { token, parkingTransactionId } = useSelector(
+    (state) => state.parkirInSlice
+  );
+  const { data, isLoading, isError, error, refetch } = useGetAllTicketsQuery({
+    token,
+  });
+
+  useEffect(() => {
+    refetch();
+  }, [parkingTransactionId]);
   if (isLoading) {
     return <Loader />;
   }
   if (isError) {
+    console.log(error, 'error');
     return <ErrorScreen />;
   }
+
   return (
     <ScrollView>
       <View style={style.container}>
@@ -99,7 +109,7 @@ const BookingPage = ({ navigation }) => {
                     textDecorationLine: 'underline',
                   }}
                 >
-                  Tap to see detail
+                  Tap to see detai
                 </Text>
               </View>
             </Pressable>

@@ -6,16 +6,16 @@ import {
   StyleSheet,
   Image,
   TextInput,
-} from 'react-native';
-import React, { useEffect } from 'react';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import { useGetAllTicketsQuery } from '../redux/services/parkirInApi';
-import { useSelector } from 'react-redux';
-import Loader from '../components/Loader';
-import ErrorScreen from './ErrorScreen';
+} from "react-native";
+import React, { useEffect } from "react";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import { useGetAllTicketsQuery } from "../redux/services/parkirInApi";
+import { useSelector } from "react-redux";
+import Loader from "../components/Loader";
+import ErrorScreen from "./ErrorScreen";
 
 const BookingPage = ({ navigation }) => {
-  const [search, onChangeSearch] = React.useState('');
+  const [search, onChangeSearch] = React.useState("");
   const { token, parkingTransactionId } = useSelector(
     (state) => state.parkirInSlice
   );
@@ -30,7 +30,7 @@ const BookingPage = ({ navigation }) => {
     return <Loader />;
   }
   if (isError) {
-    console.log(error, 'error');
+    console.log(error, "error");
     return <ErrorScreen />;
   }
 
@@ -39,7 +39,7 @@ const BookingPage = ({ navigation }) => {
       <View style={style.container}>
         <View style={style.navigation}>
           <TextInput
-            placeholder='🔍 Cari E-Tiket'
+            placeholder="🔍 Cari E-Tiket"
             editable
             multiline
             numberOfLines={4}
@@ -50,31 +50,31 @@ const BookingPage = ({ navigation }) => {
           />
           <View style={style.cardTextProductFilter}>
             <Pressable style={style.boxFilter}>
-              <Text style={{ color: '#ffff' }}>Berlangsung</Text>
+              <Text style={{ color: "#ffff" }}>Berlangsung</Text>
             </Pressable>
             <Pressable style={style.boxFilter}>
-              <Text style={{ color: '#ffff' }}>Selesai</Text>
+              <Text style={{ color: "#ffff" }}>Selesai</Text>
             </Pressable>
             <View
               style={{
-                flexDirection: 'row',
-                justifyContent: 'center',
+                flexDirection: "row",
+                justifyContent: "center",
                 marginStart: 100,
               }}
             >
               <View
-                style={{ alignItems: 'flex-end', justifyContent: 'center' }}
+                style={{ alignItems: "flex-end", justifyContent: "center" }}
               >
                 <Ionicons
-                  name='filter-outline'
+                  name="filter-outline"
                   size={25}
-                  color='#ffc629'
+                  color="#ffc629"
                 ></Ionicons>
               </View>
               <View
                 style={{
-                  alignItems: 'flex-end',
-                  justifyContent: 'center',
+                  alignItems: "flex-end",
+                  justifyContent: "center",
                   marginLeft: 5,
                 }}
               >
@@ -84,33 +84,37 @@ const BookingPage = ({ navigation }) => {
           </View>
         </View>
         {data?.map((el) => {
+          console.log(el, "<==");
+          const imgActive = "w-[80%] h-[60px] rounded-lg";
+          const imgExpired = "w-[80%] h-[60px] rounded-lg opacity-50";
+          const textActive = "font-bold text-lg text-left";
+          const textExpired = "font-bold text-lg text-left opacity-50";
           return (
             <Pressable
-              onPress={() => navigation.navigate('Ticket Detail', el.id)}
+              onPress={() => navigation.navigate("Ticket Detail", el.id)}
               style={style.cardTextProduct}
-              key={el.id + 'screen-tiket'}
+              key={el.id + "screen-tiket"}
             >
               <View style={style.boxProductImg}>
                 <Image
                   source={{
                     uri: el.ParkingSlot.Mall.imgUrl,
                   }}
-                  style={style.imageCardProduct}
+                  // style={style.imageCardProduct}
+                  className={el.isExpired ? imgExpired : imgActive}
                 />
               </View>
               <View style={style.boxProduct}>
-                <Text style={style.textTitleProduct}>
+                <Text className={el.isExpired ? textExpired : textActive}>
                   {el.ParkingSlot.Mall.name}
                 </Text>
-                <Text style={style.textProduct}>
-                  {el.ParkingSlot.Mall.address}
-                </Text>
+                <Text>{el.ParkingSlot.Mall.address}</Text>
                 <Text
                   style={{
-                    color: '#c4c4c4',
+                    color: "#c4c4c4",
                     fontSize: 13,
                     marginTop: 5,
-                    textDecorationLine: 'underline',
+                    textDecorationLine: "underline",
                   }}
                 >
                   Tap to see detail
@@ -126,9 +130,9 @@ const BookingPage = ({ navigation }) => {
               source={{
                 uri: `https://www.mtwi.co.id/public/assets/images/not-found.png`,
               }}
-              style={{ flex: 5, width: '90%', height: 250, marginTop: '30%' }}
+              style={{ flex: 5, width: "90%", height: 250, marginTop: "30%" }}
             />
-            <Text style={{ fontSize: 20, fontWeight: 'bold' }}>
+            <Text style={{ fontSize: 20, fontWeight: "bold" }}>
               Belum ada transaksi
             </Text>
             <Text style={{ fontSize: 13 }}>
@@ -147,20 +151,20 @@ export default BookingPage;
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: '100%',
-    alignContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
+    height: "100%",
+    alignContent: "center",
   },
   navigation: {
     flex: 1,
-    justifyContent: 'center',
-    alignContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#fff',
-    width: '100%',
+    justifyContent: "center",
+    alignContent: "center",
+    alignItems: "center",
+    backgroundColor: "#fff",
+    width: "100%",
     marginBottom: 10,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 2,
@@ -174,27 +178,28 @@ const style = StyleSheet.create({
     padding: 8,
     marginLeft: 10,
     borderRadius: 100,
-    borderColor: '#ffff',
-    backgroundColor: '#E9A23B',
+    borderColor: "#ffff",
+    backgroundColor: "#E9A23B",
   },
   textInput: {
-    width: '90%',
+    width: "90%",
     height: 35,
     borderWidth: 0.5,
     borderRadius: 10,
     paddingLeft: 15,
-    backgroundColor: '#ffff',
-    color: 'black',
+    backgroundColor: "#ffff",
+    color: "black",
     marginTop: 20,
   },
   cardTextProduct: {
-    width: '100%',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    backgroundColor: '#ffff',
+    width: "100%",
+    height: 100,
+    flexDirection: "row",
+    flexWrap: "wrap",
+    backgroundColor: "#ffff",
     borderRadius: 10,
     marginTop: 5,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 2,
@@ -206,36 +211,34 @@ const style = StyleSheet.create({
     flex: 1,
   },
   cardTextProductFilter: {
-    width: '90%',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+    width: "90%",
+    flexDirection: "row",
+    flexWrap: "wrap",
     borderRadius: 10,
     marginTop: 20,
     marginBottom: 15,
   },
   boxProduct: {
-    width: '50%',
-    padding: 7,
+    width: "50%",
+    justifyContent: "center",
     marginLeft: 10,
+    // borderWidth: 2
   },
   textTitleProduct: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
     fontSize: 17,
     marginTop: 3,
-    textAlign: 'left',
-  },
-  textProduct: {
-    fontSize: 12,
+    textAlign: "left",
   },
   imageCardProduct: {
-    width: '80%',
+    width: "80%",
     height: 60,
     borderRadius: 10,
   },
   boxProductImg: {
-    width: '30%',
+    width: "30%",
     padding: 4,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
 });

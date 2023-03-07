@@ -3,7 +3,7 @@ import { Button, Avatar } from "react-native-paper";
 import SpecifiedView from "../components/SpecifiedView";
 import GarageCarCard from "../components/GarageCarCard";
 
-export default function MyGarage() {
+export default function MyGarage({ navigation }) {
   return (
     <SpecifiedView className="bg-white">
       <View className="p-3 items-end">
@@ -11,7 +11,7 @@ export default function MyGarage() {
           icon="car"
           mode="contained"
           className="w-[140px] bg-[#D9A14E]"
-          onPress={() => console.log("FUNCTION BUAT ADD NEW CAR")}
+          onPress={() => navigation.navigate("Add New Car")}
         >
           Add New Car
         </Button>

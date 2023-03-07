@@ -27,6 +27,7 @@ import { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { takeToken } from './redux/slice/parkirInSlice';
 import DetailPage from './screens/TicketDetail';
+import AddNewCar from './screens/AddNewCar';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -97,6 +98,11 @@ const StackAccount = () => {
         options={{ headerShown: true }}
         name='Garasi Saya'
         component={MyGarage}
+      />
+      <Stack.Screen
+        options={{ headerShown: true }}
+        name='Add New Car'
+        component={AddNewCar}
       />
       {/* <Stack.Screen
         options={{ headerShown: true }}

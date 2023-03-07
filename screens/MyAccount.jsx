@@ -22,7 +22,7 @@ export default function MyAccount({ navigation }) {
           <View className='mx-2'>
             <Image
               source={{
-                uri: 'https://media.discordapp.net/attachments/1055001291937550366/1078574885430890547/IMG_20230224_141050.jpg?width=602&height=1072',
+                uri: 'https://cdn4.iconfinder.com/data/icons/instagram-ui-twotone/48/Paul-18-512.png',
               }}
               className='w-[60px] h-[60px] rounded-full'
             ></Image>

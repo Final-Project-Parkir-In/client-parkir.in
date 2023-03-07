@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useEffect, useState } from 'react';
 import { ScrollView, View, Text, Image } from 'react-native';
 import { Button, List, Avatar } from 'react-native-paper';
 import { useSelector } from 'react-redux';
@@ -7,13 +7,17 @@ import { useGetMallByIdQuery } from '../redux/services/parkirInApi';
 import ErrorScreen from './ErrorScreen';
 
 export default function MallDetail({ navigation }) {
-  const [expanded, setExpanded] = React.useState('chevron-down');
+  const [expanded, setExpanded] = useState('chevron-down');
   const handlePress = () => setExpanded('chevron-up');
   const { idMall, token } = useSelector((state) => state.parkirInSlice);
-  const { data, isLoading, isError, error } = useGetMallByIdQuery({
+  const { data, isLoading, isError, error, refetch } = useGetMallByIdQuery({
     id: idMall,
     token,
   });
+  useEffect(() => {
+    refetch();
+  }, [idMall]);
+  console.log(data);
 
   if (isLoading) {
     return <Loader />;

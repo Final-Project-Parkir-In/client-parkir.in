@@ -18,20 +18,18 @@ import MapView, { Marker } from 'react-native-maps';
 import Loader from '../components/Loader';
 import axios from 'axios';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { useGetAllMallsQuery } from '../redux/services/parkirInApi';
+import { useGetNearestMallMutation } from '../redux/services/parkirInApi';
 import ErrorScreen from './ErrorScreen';
 import { useSelector } from 'react-redux';
 
-const MapBottomSheetTr = () => {
+const MapBottomSheetTr = ({ navigation }) => {
   const [isLoading, setIsLoading] = useState(false);
   const { token } = useSelector((state) => state.parkirInSlice);
   // get all data mall from rtk
-  const {
-    data: malls,
-    isLoading: isLoadingMall,
-    isError,
-    error,
-  } = useGetAllMallsQuery({ token });
+  const [
+    getNearestMall,
+    { data: malls, isLoading: isLoadingMall, isError, error },
+  ] = useGetNearestMallMutation();
 
   // get user coordinat
   const [coordinat, setCoordinat] = useState({
@@ -45,23 +43,31 @@ const MapBottomSheetTr = () => {
   useEffect(() => {
     // function to get coordinate user
     (async () => {
-      setIsLoading(true);
-      let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== 'granted') {
-        console.log('error disini');
-        setErrorMsg('Permission to access location was denied');
-        setIsLoading(false);
-        return;
-      }
-      let { coords } = await Location.getCurrentPositionAsync({});
-      setCoordinat({
-        ...coordinat,
-        latitude: coords.latitude,
-        longitude: coords.longitude,
+      try {
+        setIsLoading(true);
+        let { status } = await Location.requestForegroundPermissionsAsync();
+        if (status !== 'granted') {
+          throw new Error('granted');
+        }
+        let { coords } = await Location.getCurrentPositionAsync({});
+        setCoordinat({
+          ...coordinat,
+          latitude: coords.latitude,
+          longitude: coords.longitude,
 
-        accuracy: coords.accuracy,
-      });
-      setIsLoading(false);
+          accuracy: coords.accuracy,
+        });
+        getNearestMall({
+          token,
+          locationUser: {
+            lat: coords?.latitude,
+            long: coords?.longitude,
+          },
+        });
+        setIsLoading(false);
+      } catch (err) {
+        setErrorMsg('Permission to access location was denied');
+      }
     })();
   }, []);
 
@@ -79,7 +85,6 @@ const MapBottomSheetTr = () => {
     return <ErrorScreen />;
   }
   let cardRef = createRef(null);
-
   const renderHeader = () => (
     <View className='bg-white h-10'>
       <TouchableOpacity onPress={() => cardRef.current.snapTo(1)}>
@@ -88,9 +93,16 @@ const MapBottomSheetTr = () => {
     </View>
   );
   const renderInner = () => {
-    return malls.map((el) => {
-      return <MapsMallCard {...el} key={el.id + '-id-malls'} />;
-    });
+    return (
+      <View className='px-6  bg-white'>
+        {malls?.map((el) => {
+          console.log(el.id, 'ini cek');
+          return (
+            <MapsMallCard {...el} key={el.id + '-id-malls'} {...navigation} />
+          );
+        })}
+      </View>
+    );
   };
   const getDetailMall = () => {
     cardRef.current.snapTo(1);
@@ -120,13 +132,14 @@ const MapBottomSheetTr = () => {
           <Marker coordinate={coordinat} pinColor={'blue'} />
           {/* lokasi mall */}
           {malls?.map(({ lat, long, id }, i) => {
+            console.log(id, i, 'isisi');
             return (
               <Marker
                 coordinate={{
                   latitude: +lat,
                   longitude: +long,
                 }}
-                pinColor={'green'}
+                pinColor={'red'}
                 key={i + '-id-coordinate'}
                 onPress={() => {
                   getDetailMall();
@@ -150,7 +163,7 @@ const styles = StyleSheet.create({
   header: {
     backgroundColor: '#f7f5eee8',
     shadowColor: '#000000',
-    paddingTop: 20,
+    // paddingTop: 20,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
   },

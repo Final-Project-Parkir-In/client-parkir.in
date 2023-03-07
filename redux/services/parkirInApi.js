@@ -91,6 +91,18 @@ export const parkirInApi = createApi({
         },
       }),
     }),
+    // endpoint untuk mendapatkan nearst mall
+    getNearestMall: builder.mutation({
+      query: ({ token, locationUser }) => ({
+        url: 'nearestMalls',
+        headers: {
+          access_token: token,
+        },
+        // format harus {lat:'usu',long:'usu' }
+        body: locationUser,
+        method: 'post',
+      }),
+    }),
   }),
 });
 export const {
@@ -103,4 +115,5 @@ export const {
   useGetAllTicketsQuery,
   usePostBookingSpotMutation,
   useGetInfoBookingQuery,
+  useGetNearestMallMutation,
 } = parkirInApi;

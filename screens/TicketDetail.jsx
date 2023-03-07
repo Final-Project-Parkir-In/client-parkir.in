@@ -5,12 +5,15 @@ import {
   Image,
   StyleSheet,
   Pressable,
+  TouchableOpacity,
 } from 'react-native';
 import DropDownItem from 'react-native-drop-down-item';
+
 import QRCode from 'react-native-qrcode-svg';
 import { useSelector, useDispatch } from 'react-redux';
 import Loader from '../components/Loader';
 import { useGetInfoBookingQuery } from '../redux/services/parkirInApi';
+import { getParkingTransactionId } from '../redux/slice/parkirInSlice';
 import ErrorScreen from './ErrorScreen';
 
 const DetailPage = ({ navigation, route: { params } }) => {
@@ -29,6 +32,7 @@ const DetailPage = ({ navigation, route: { params } }) => {
   const { token, parkingTransactionId } = useSelector(
     (state) => state.parkirInSlice
   );
+  const dispatch = useDispatch();
   const { data, isLoading, isError, isSuccess } = useGetInfoBookingQuery({
     token,
     transactionId: parkingTransactionId,
@@ -39,6 +43,11 @@ const DetailPage = ({ navigation, route: { params } }) => {
   if (isError) {
     return <ErrorScreen />;
   }
+  const toPay = (id) => {
+    dispatch(getParkingTransactionId({ parkingTransactionId: id }));
+    navigation.navigate('payment');
+  };
+  console.log(data, '<=== car in');
   return (
     <ScrollView>
       <View style={style.container}>
@@ -113,23 +122,34 @@ const DetailPage = ({ navigation, route: { params } }) => {
             marginBottom: 20,
           }}
         >
-          <QRCode
-            value={JSON.stringify({
-              name: data?.User?.name,
-              mall: data?.ParkingSlot?.Mall?.name,
-              plat: data?.User?.Cars[0]?.numberPlate,
-              spotParkir: data?.ParkingSlot?.spot,
-              typeMobil: data?.User?.Cars[0]?.type,
-              brandMobil: data?.User?.Cars[0]?.brand,
-            })}
-            logo={{
-              uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAA..',
-            }}
-            logoSize={50}
-            size={200}
-            logoBackgroundColor='transparent'
-            className='w-full h-full'
-          />
+          {data?.carIn ? (
+            <TouchableOpacity
+              onPress={() => {
+                console.log('hai');
+                toPay(data?.id);
+              }}
+            >
+              <Text>Pay ya</Text>
+            </TouchableOpacity>
+          ) : (
+            <QRCode
+              value={JSON.stringify({
+                name: data?.User?.name,
+                mall: data?.ParkingSlot?.Mall?.name,
+                plat: data?.User?.Cars[0]?.numberPlate,
+                spotParkir: data?.ParkingSlot?.spot,
+                typeMobil: data?.User?.Cars[0]?.type,
+                brandMobil: data?.User?.Cars[0]?.brand,
+              })}
+              logo={{
+                uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAA..',
+              }}
+              logoSize={50}
+              size={200}
+              logoBackgroundColor='transparent'
+              className='w-full h-full'
+            />
+          )}
         </View>
 
         {/* QR Image */}

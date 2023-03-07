@@ -16,7 +16,11 @@ export default function PaymentScreens() {
     isLoading,
     isError,
     error,
+    refetch,
   } = usePaySpotQuery({ parkingTransactionId, token }); // akan berdasrkan parking spot id
+  useEffect(() => {
+    refetch();
+  }, [parkingTransactionId]);
   if (isLoading) {
     return <Loader />;
   }

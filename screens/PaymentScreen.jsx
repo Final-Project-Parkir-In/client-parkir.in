@@ -25,7 +25,6 @@ export default function PaymentScreens() {
     return <Loader />;
   }
   if (isError) {
-    console.log(error, '<===');
     return <ErrorScreen />;
   }
   return (

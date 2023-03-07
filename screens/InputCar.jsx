@@ -1,79 +1,94 @@
-import * as React from "react";
-import { View, Text, Image, ScrollView } from "react-native";
-import { Picker } from "@react-native-picker/picker";
-import SpecifiedView from "../components/SpecifiedView";
-import { TextInput, Button } from "react-native-paper";
+import * as React from 'react';
+import { View, Text, Image, ScrollView } from 'react-native';
+import { Picker } from '@react-native-picker/picker';
+import SpecifiedView from '../components/SpecifiedView';
+import { TextInput, Button } from 'react-native-paper';
+import { usePostAddCarMutation } from '../redux/services/parkirInApi';
+import Loader from '../components/Loader';
+import ErrorScreen from './ErrorScreen';
+import { useSelector } from 'react-redux';
 
 export default function InputCar({ navigation }) {
-  const [brand, setBrand] = React.useState("");
-  const [type, setType] = React.useState("");
-  const [numberPlate, setNumberPlate] = React.useState("");
-  console.log(brand, type, numberPlate);
-
+  const [brand, setBrand] = React.useState('');
+  const [type, setType] = React.useState('');
+  const [numberPlate, setNumberPlate] = React.useState('');
+  const [postAddCar, { isSuccess, isLoading, isError }] =
+    usePostAddCarMutation();
+  const { userId } = useSelector((state) => state.parkirInSlice);
+  const handleAddCar = () => {
+    try {
+      postAddCar({ dataCar: { numberPlate, brand, type }, userId });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  if (isLoading) {
+    return <Loader />;
+  }
+  if (isError) {
+    return <ErrorScreen />;
+  }
   return (
-    <SpecifiedView className="bg-[#2F3B6E] p-4 h-screen">
-      <ScrollView className="h-full mt-8">
-        <View className="justify-center items-center">
+    <SpecifiedView className='bg-[#2F3B6E] p-4 h-screen'>
+      <ScrollView className='h-full mt-8'>
+        <View className='justify-center items-center'>
           <Image
-            source={require("../assets/parkirin_logo2.png")}
-            className="w-[15vh] h-[15vh] scale-75 rounded-full"
+            source={require('../assets/parkirin_logo2.png')}
+            className='w-[15vh] h-[15vh] scale-75 rounded-full'
           />
         </View>
-        <View className="mx-6 h-fit p-8 bg-[#D9A14E] rounded-3xl">
-          <View className="bg-white mb-3 rounded-md border border-slate-400">
+        <View className='mx-6 h-fit p-8 bg-[#D9A14E] rounded-3xl'>
+          <View className='bg-white mb-3 rounded-md border border-slate-400'>
             <Picker
               selectedValue={brand}
               onValueChange={(itemValue, itemIndex) => setBrand(itemValue)}
             >
-              <Picker.Item label="Please select" />
+              <Picker.Item label='Please select' />
 
-              <Picker.Item label="Toyota" value="Toyota" />
-              <Picker.Item label="Honda" value="Honda" />
-              <Picker.Item label="Mustibisa" value="Mustibisa" />
+              <Picker.Item label='Toyota' value='Toyota' />
+              <Picker.Item label='Honda' value='Honda' />
+              <Picker.Item label='Mustibisa' value='Mustibisa' />
             </Picker>
           </View>
 
-          <View className="bg-white mb-3 rounded-md border border-slate-400">
+          <View className='bg-white mb-3 rounded-md border border-slate-400'>
             <Picker
               selectedValue={type}
               onValueChange={(itemValue, itemIndex) => setType(itemValue)}
             >
-              <Picker.Item label="Please select" />
-              <Picker.Item label="Fortuner" value="Fortuner" />
-              <Picker.Item label="Innova" value="Innova" />
-              <Picker.Item label="Esemka" value="Esemka" />
+              <Picker.Item label='Please select' />
+              <Picker.Item label='Fortuner' value='Fortuner' />
+              <Picker.Item label='Innova' value='Innova' />
+              <Picker.Item label='Esemka' value='Esemka' />
             </Picker>
           </View>
 
           <TextInput
-            label="Registration Number Plate"
-            mode="outlined"
+            label='Registration Number Plate'
+            mode='outlined'
             value={numberPlate}
             onChangeText={(numberPlate) => setNumberPlate(numberPlate)}
-            className="mb-3"
+            className='mb-3'
           />
-          <View className="justify-center items-center mt-8">
+          <View className='justify-center items-center mt-8'>
             <Button
-              icon="account-check-outline"
-              mode="contained"
-              className="bg-[#2F3B6E] w-[15vh]"
-              onPress={() =>
-                // alert("Jalankan function register & create new car!")
-                navigation.navigate("Login")
-              }
+              icon='account-check-outline'
+              mode='contained'
+              className='bg-[#2F3B6E] w-[15vh]'
+              onPress={() => handleAddCar()}
             >
-              Register
+              Add Car
             </Button>
           </View>
         </View>
-        <View className="justify-center items-center mt-8 ">
-          <Text className="text-[#D9A14E]">Already have account?</Text>
+        <View className='justify-center items-center mt-8 '>
+          <Text className='text-[#D9A14E]'>Already have account?</Text>
           <Button
-            icon="login-variant"
-            mode="contained"
-            textColor="black"
-            className="bg-[#D9A14E] w-[15vh] my-2"
-            onPress={() => navigation.navigate("Login")}
+            icon='login-variant'
+            mode='contained'
+            textColor='black'
+            className='bg-[#D9A14E] w-[15vh] my-2'
+            onPress={() => navigation.navigate('Login')}
           >
             Sign In
           </Button>

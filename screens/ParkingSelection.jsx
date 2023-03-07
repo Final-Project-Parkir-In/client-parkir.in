@@ -67,7 +67,6 @@ export default function ParkingSelection({ navigation }) {
       alert('spot udah di booking');
     }
   };
-  console.log(parkingSpots, '<===');
 
   return (
     <SpecifiedView style={{ flex: 1 }} className='bg-[#D9A14E]'>
@@ -99,7 +98,9 @@ export default function ParkingSelection({ navigation }) {
                     setSpotData({ ...el });
                   }}
                 >
-                  <Text className="text-xl font-bold text-[#2F3B6E]">{el.spot}</Text>
+                  <Text className='text-xl font-bold text-[#2F3B6E]'>
+                    {el.spot}
+                  </Text>
                 </TouchableOpacity>
               );
             })}

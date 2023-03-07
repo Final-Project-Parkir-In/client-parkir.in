@@ -6,6 +6,7 @@ export const parkirIn = createSlice({
     idMall: 0,
     parkingTransactionId: 1,
     token: '',
+    userId: 0,
   },
   reducers: {
     getExactIdMall: (state, action) => {
@@ -19,6 +20,10 @@ export const parkirIn = createSlice({
     takeToken: (state, action) => {
       const { token } = action.payload;
       state.token = token;
+    },
+    takeUserId: (state, action) => {
+      const { userId } = action.payload;
+      state.userId = userId;
     },
   },
 });

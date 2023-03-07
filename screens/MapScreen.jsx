@@ -96,7 +96,6 @@ const MapBottomSheetTr = ({ navigation }) => {
     return (
       <View className='px-6  bg-white'>
         {malls?.map((el) => {
-          console.log(el.id, 'ini cek');
           return (
             <MapsMallCard {...el} key={el.id + '-id-malls'} {...navigation} />
           );

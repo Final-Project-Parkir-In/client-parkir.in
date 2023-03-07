@@ -47,7 +47,6 @@ const DetailPage = ({ navigation, route: { params } }) => {
     dispatch(getParkingTransactionId({ parkingTransactionId: id }));
     navigation.navigate('payment');
   };
-  console.log(data, '<=== car in');
 
   return (
     <ScrollView>
@@ -63,14 +62,20 @@ const DetailPage = ({ navigation, route: { params } }) => {
         >
           <View style={style.cardTextDate}>
             <View style={style.boxStatus}>
-              <View className="gap-2">
-                <Text style={style.textTitleDate}>{new Date(data.createdAt).toLocaleDateString("en-US")}</Text>
-                <Text style={style.textTitleDate}>{new Date(data.createdAt).toLocaleTimeString("en-US")}</Text>
+              <View className='gap-2'>
+                <Text style={style.textTitleDate}>
+                  {new Date(data.createdAt).toLocaleDateString('en-US')}
+                </Text>
+                <Text style={style.textTitleDate}>
+                  {new Date(data.createdAt).toLocaleTimeString('en-US')}
+                </Text>
               </View>
             </View>
             <View style={style.status}>
               <Text style={style.textTitleDate}>Order Id</Text>
-              <Text style={{ color: '#c0c4c0', marginTop: 4 }}>{data.id}-PI-23</Text>
+              <Text style={{ color: '#c0c4c0', marginTop: 4 }}>
+                {data.id}-PI-23
+              </Text>
             </View>
           </View>
           <View style={style.cardTextDate}>
@@ -97,7 +102,9 @@ const DetailPage = ({ navigation, route: { params } }) => {
                 <Text>📍 Parking Spot</Text>
               </View>
               <View style={style.lokasiInfo}>
-                <Text style={{ fontWeight: '900', fontSize: 17 }}>{data.ParkingSlot.spot}</Text>
+                <Text style={{ fontWeight: '900', fontSize: 17 }}>
+                  {data.ParkingSlot.spot}
+                </Text>
               </View>
             </View>
             <View style={style.cardTextLokasi}>
@@ -128,7 +135,6 @@ const DetailPage = ({ navigation, route: { params } }) => {
           {data?.carIn ? (
             <TouchableOpacity
               onPress={() => {
-                console.log('hai');
                 toPay(data?.id);
               }}
             >
@@ -143,6 +149,7 @@ const DetailPage = ({ navigation, route: { params } }) => {
                 spotParkir: data?.ParkingSlot?.spot,
                 typeMobil: data?.User?.Cars[0]?.type,
                 brandMobil: data?.User?.Cars[0]?.brand,
+                id: data?.id,
               })}
               logo={{
                 uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAA..',

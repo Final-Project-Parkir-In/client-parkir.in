@@ -12,7 +12,6 @@ export default function Register({ navigation }) {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [phoneNumber, setPhoneNumber] = React.useState('');
-  console.log(name, email, password, phoneNumber);
   const dispatch = useDispatch();
 
   const [registerUser, { isLoading, isError, data, isSuccess }] =
@@ -32,7 +31,7 @@ export default function Register({ navigation }) {
     return <ErrorScreen />;
   }
   if (isSuccess) {
-    navigation.navigate('Login');
+    navigation.navigate('Input Car');
   }
 
   return (

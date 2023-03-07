@@ -103,6 +103,13 @@ export const parkirInApi = createApi({
         method: 'post',
       }),
     }),
+    postAddCar: builder.mutation({
+      query: ({ dataCar, userId }) => ({
+        url: '/cars/' + userId,
+        method: 'post',
+        body: dataCar,
+      }),
+    }),
   }),
 });
 export const {
@@ -116,4 +123,5 @@ export const {
   usePostBookingSpotMutation,
   useGetInfoBookingQuery,
   useGetNearestMallMutation,
+  usePostAddCarMutation,
 } = parkirInApi;

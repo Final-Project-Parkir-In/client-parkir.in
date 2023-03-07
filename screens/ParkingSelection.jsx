@@ -83,23 +83,23 @@ export default function ParkingSelection({ navigation }) {
             {parkingSpots.map((el, i) => {
               let selectedSpot = '';
               if (el.id === selected) {
-                selectedSpot = 'border border-2';
+                selectedSpot = 'border-4 border-[#D9A14E]';
               }
               return (
                 <TouchableOpacity
                   key={el.id + '-id-park'}
                   className={
                     el.isAvailable
-                      ? `w-20 h-20 m-2 rounded-xl bg-amber-100 shadow-lg` +
+                      ? `w-20 h-20 m-2 rounded-xl bg-amber-100 shadow-lg justify-center items-center ` +
                         selectedSpot
-                      : 'w-20 h-20 m-2 rounded-xl bg-slate-400 shadow-lg '
+                      : 'w-20 h-20 m-2 rounded-xl bg-slate-400 shadow-lg justify-center items-center '
                   }
                   onPress={() => {
                     setSelected(el.id);
                     setSpotData({ ...el });
                   }}
                 >
-                  <Text>{el.spot}</Text>
+                  <Text className="text-xl font-bold text-[#2F3B6E]">{el.spot}</Text>
                 </TouchableOpacity>
               );
             })}
@@ -115,7 +115,7 @@ export default function ParkingSelection({ navigation }) {
               <Text>Tidak Tersedia</Text>
             </View>
             <View className='items-center gap-1 flex flex-row'>
-              <View className='bg-amber-300 border-2 border-[#2F3B6E] rounded-full h-6 w-6' />
+              <View className='bg-amber-100 border-2 border-[#D9A14E] rounded-full h-6 w-6' />
               {/* <Badge className="bg-[#D9A14E] border-[#2F3B6E]" /> */}
               <Text>Dipilih</Text>
             </View>
@@ -124,8 +124,8 @@ export default function ParkingSelection({ navigation }) {
       </ScrollView>
       <View className='w-full justify-center items-center absolute bottom-0 bg-white'>
         <View className='h-14 p-4 w-full flex flex-row justify-between items-center'>
-          <Text className='font-bold'>Price (per hour)</Text>
-          <Text className='font-bold'>Rp 15.000</Text>
+          <Text className='font-bold'>Booking Price</Text>
+          <Text className='font-bold'>Rp 10.000**</Text>
         </View>
         <Button
           mode='contained'

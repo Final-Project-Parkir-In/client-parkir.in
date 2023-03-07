@@ -18,11 +18,11 @@ const DetailPage = ({ navigation, route: { params } }) => {
     content: [
       {
         title: 'Syarat & Ketentuan ↘',
-        body: '1. Pencarian, Pemesanan dan Pembayaran LOCKEY dilakukan melalui Parkir.In\n\n2. LOCKEY hanya dapa digunakan pada jam operasional gedung/mall',
+        body: '1. Pencarian, Pemesanan dan Pembayaran dilakukan melalui Parkir.In\n\n2. Parkir.In mengikuti jam operasional mall',
       },
       {
         title: 'Cara Penggunaan ↘',
-        body: '1. Temukan LOCKEY di menu aplikasi Parkir.In',
+        body: '1. Parkir.In',
       },
     ],
   };
@@ -39,6 +39,7 @@ const DetailPage = ({ navigation, route: { params } }) => {
   if (isError) {
     return <ErrorScreen />;
   }
+  // console.log(data, ">>>>>>sadoaso")
   return (
     <ScrollView>
       <View style={style.container}>
@@ -53,11 +54,14 @@ const DetailPage = ({ navigation, route: { params } }) => {
         >
           <View style={style.cardTextDate}>
             <View style={style.boxStatus}>
-              <Text style={style.textTitleDate}>02 Maret 2022 | 10:18</Text>
-              <Text style={style.textTitleDate}>Order Id</Text>
+              <View className="gap-2">
+                <Text style={style.textTitleDate}>{new Date(data.createdAt).toLocaleDateString("en-US")}</Text>
+                <Text style={style.textTitleDate}>{new Date(data.createdAt).toLocaleTimeString("en-US")}</Text>
+              </View>
             </View>
             <View style={style.status}>
-              <Text style={{ color: '#c0c4c0' }}>c23dcsr3</Text>
+              <Text style={style.textTitleDate}>Order Id</Text>
+              <Text style={{ color: '#c0c4c0', marginTop: 4 }}>{data.id}-PI-23</Text>
             </View>
           </View>
           <View style={style.cardTextDate}>
@@ -65,27 +69,26 @@ const DetailPage = ({ navigation, route: { params } }) => {
               <Image
                 style={{ width: '90%', height: 55, borderRadius: 100 }}
                 source={{
-                  uri: 'https://i.playboard.app/p/AMLnZu_g3TfFFLz690rLM2UdsHGr6vbspj_q2Qy8pFhZxQ/default.jpg',
+                  uri: data.ParkingSlot.Mall.imgUrl,
                 }}
               />
             </View>
             <View style={style.info}>
               <Text style={{ fontWeight: '900', fontSize: 17 }}>
-                Mall Kelapa Gading
+                {data.ParkingSlot.Mall.name}
               </Text>
               <Text style={{ color: '#c0c4c0' }}>
-                Jl. Bulevar Kelapa Gading Blok M, Klp. Gading Kota Jakarta
-                Utara, DKI Jakarta
+                {data.ParkingSlot.Mall.address}
               </Text>
             </View>
           </View>
           <View>
             <View style={style.cardTextLokasi}>
               <View style={style.boxLokasiInfo}>
-                <Text>📍 Location</Text>
+                <Text>📍 Parking Spot</Text>
               </View>
               <View style={style.lokasiInfo}>
-                <Text style={{ fontWeight: '900', fontSize: 17 }}>01</Text>
+                <Text style={{ fontWeight: '900', fontSize: 17 }}>{data.ParkingSlot.spot}</Text>
               </View>
             </View>
             <View style={style.cardTextLokasi}>

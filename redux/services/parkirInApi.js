@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const parkirInApi = createApi({
   reducerPath: 'parkirInApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://5aae-139-228-111-126.ap.ngrok.io',
+    baseUrl: 'https://0d22-139-228-111-126.ap.ngrok.io',
   }),
   endpoints: (builder) => ({
     // endpoint untuk user register
@@ -26,7 +26,7 @@ export const parkirInApi = createApi({
     }),
     // endpoint ambil semua malls
     getAllMalls: builder.query({
-      query: (token) => ({
+      query: ({ token }) => ({
         url: '/malls',
         method: 'get',
         headers: {
@@ -85,7 +85,7 @@ export const parkirInApi = createApi({
     // enpoint untuk ambil semua tikets
     getAllTickets: builder.query({
       query: ({ token }) => ({
-        url: '/getAllTickets',
+        url: '/tickets',
         headers: {
           access_token: token,
         },

@@ -20,16 +20,18 @@ import axios from 'axios';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useGetAllMallsQuery } from '../redux/services/parkirInApi';
 import ErrorScreen from './ErrorScreen';
+import { useSelector } from 'react-redux';
 
 const MapBottomSheetTr = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const { token } = useSelector((state) => state.parkirInSlice);
   // get all data mall from rtk
   const {
     data: malls,
     isLoading: isLoadingMall,
     isError,
     error,
-  } = useGetAllMallsQuery();
+  } = useGetAllMallsQuery({ token });
 
   // get user coordinat
   const [coordinat, setCoordinat] = useState({
@@ -86,10 +88,12 @@ const MapBottomSheetTr = () => {
     </View>
   );
   const renderInner = () => {
-    console.log('first');
     return malls.map((el) => {
       return <MapsMallCard {...el} key={el.id + '-id-malls'} />;
     });
+  };
+  const getDetailMall = () => {
+    cardRef.current.snapTo(1);
   };
 
   return (
@@ -124,6 +128,9 @@ const MapBottomSheetTr = () => {
                 }}
                 pinColor={'green'}
                 key={i + '-id-coordinate'}
+                onPress={() => {
+                  getDetailMall();
+                }}
               />
             );
           })}

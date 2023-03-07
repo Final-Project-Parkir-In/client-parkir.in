@@ -1,4 +1,11 @@
-import { ScrollView, View, Text, Pressable, TouchableOpacity, Alert } from 'react-native';
+import {
+  ScrollView,
+  View,
+  Text,
+  Pressable,
+  TouchableOpacity,
+  Alert,
+} from 'react-native';
 import { Button, Badge } from 'react-native-paper';
 import { nanoid } from '@reduxjs/toolkit';
 import React, { useEffect, useState } from 'react';
@@ -49,13 +56,13 @@ export default function ParkingSelection({ navigation }) {
   }
   if (isSuccess) {
     dispatch(getParkingTransactionId({ parkingTransactionId: data.id }));
+    navigation.navigate('My Ticket');
     // console.log(data, 'ini dat');
   }
 
   const handleBooking = () => {
     if (spotData.isAvailable) {
       postBookingSpot({ token, parkingId: spotData?.id });
-      navigation.navigate('My Ticket');
     } else {
       alert('spot udah di booking');
     }

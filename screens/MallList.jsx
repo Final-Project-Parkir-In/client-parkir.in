@@ -12,7 +12,12 @@ export default function MallList({ navigation }) {
   const [searchQuery, setSearchQuery] = React.useState('');
   const onChangeSearch = (query) => setSearchQuery(query);
   // get all malls query from rtk
-  const { data: malls, isLoading, error, isError } = useGetAllMallsQuery(token);
+  const {
+    data: malls,
+    isLoading,
+    error,
+    isError,
+  } = useGetAllMallsQuery({ token });
   if (isLoading) {
     return <Loader />;
   }

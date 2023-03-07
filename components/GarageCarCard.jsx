@@ -8,8 +8,10 @@ export default function GarageCarCard() {
   const handleSelect = () => {
     if (isDefault == "star") {
       setIsDefault("star-outline");
+      console.log("CHANGE isDefault CAR => FALSE")
     } else {
       setIsDefault("star");
+      console.log("CHANGE isDefault CAR => TRUE")
     }
   };
 

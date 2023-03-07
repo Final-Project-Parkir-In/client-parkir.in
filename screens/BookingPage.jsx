@@ -13,6 +13,7 @@ import { useGetAllTicketsQuery } from '../redux/services/parkirInApi';
 import { useSelector } from 'react-redux';
 import Loader from '../components/Loader';
 import ErrorScreen from './ErrorScreen';
+
 const BookingPage = ({ navigation }) => {
   const [search, onChangeSearch] = React.useState('');
   const { token, parkingTransactionId } = useSelector(
@@ -93,14 +94,14 @@ const BookingPage = ({ navigation }) => {
               <View style={style.boxProductImg}>
                 <Image
                   source={{
-                    uri: `https://images.tokopedia.net/img/JFrBQq/2022/6/24/7a369abd-409f-4faf-85bd-eb2b0e748e0d.jpg`,
+                    uri: el.ParkingSlot.Mall.imgUrl,
                   }}
                   style={style.imageCardProduct}
                 />
               </View>
               <View style={style.boxProduct}>
-                <Text style={style.textTitleProduct}>uwu</Text>
-                <Text style={style.textProduct}>Description</Text>
+                <Text style={style.textTitleProduct}>{el.ParkingSlot.Mall.name}</Text>
+                <Text style={style.textProduct}>{el.ParkingSlot.Mall.address}</Text>
                 <Text
                   style={{
                     color: '#c4c4c4',
@@ -109,7 +110,7 @@ const BookingPage = ({ navigation }) => {
                     textDecorationLine: 'underline',
                   }}
                 >
-                  Tap to see detai
+                  Tap to see detail
                 </Text>
               </View>
             </Pressable>
@@ -187,7 +188,7 @@ const style = StyleSheet.create({
     width: '100%',
     flexDirection: 'row',
     flexWrap: 'wrap',
-    backgroundColor: '#fff',
+    backgroundColor: '#ffff',
     borderRadius: 10,
     marginTop: 5,
     shadowColor: '#000',

@@ -19,7 +19,7 @@ export default function Home({ navigation }) {
     getData();
   }, []);
   return (
-    <ScrollView className='h-screen'>
+    <ScrollView className='h-screen bg-white'>
       <View className='h-[50vh] bg-[#2F3B6E]'>
         <Image
           source={require('../assets/parkirin_logo2.png')}

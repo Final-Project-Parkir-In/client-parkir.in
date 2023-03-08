@@ -89,7 +89,7 @@ const MapBottomSheetTr = ({ navigation }) => {
   let cardRef = createRef(null);
   const renderHeader = () => (
     <View className='bg-white h-10'>
-      <TouchableOpacity onPress={() => cardRef.current.snapTo(1)} className="border">
+      <TouchableOpacity onPress={() => cardRef.current.snapTo(1)} className=''>
         <Text>Close</Text>
       </TouchableOpacity>
     </View>

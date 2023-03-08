@@ -129,7 +129,7 @@ export default function ParkingSelection({ navigation }) {
       <View className='w-full justify-center items-center absolute bottom-0 bg-white'>
         <View className='h-14 p-4 w-full flex flex-row justify-between items-center'>
           <Text className='font-bold'>Booking Price</Text>
-          <Text className='font-bold'>{parkingSpots[0].priceOfSpot.toLocaleString("id-ID", {
+          <Text className='font-bold'>{parkingSpots[0]?.priceOfSpot.toLocaleString("id-ID", {
             style: "currency",
             currency: "IDR",
           })}</Text>

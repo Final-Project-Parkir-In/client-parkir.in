@@ -73,7 +73,7 @@ export default function MallList({ navigation }) {
           Lokasi Parkir.In terdekat
         </Text>
       </View>
-      <ScrollView className='h-screen'>
+      <ScrollView className='h-fit mb-28'>
         {malls().map((el, i) => {
           return (
             <MallListCard navigation={navigation} key={i + 'malls'} {...el} />

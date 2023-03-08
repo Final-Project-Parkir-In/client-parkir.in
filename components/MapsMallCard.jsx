@@ -3,7 +3,7 @@ import { Avatar } from 'react-native-paper';
 import { useDispatch } from 'react-redux';
 import { getExactIdMall } from '../redux/slice/parkirInSlice';
 
-export default function MapsMallCard({ navigate, imgUrl, name, id }) {
+export default function MapsMallCard({ navigate, imgUrl, address, name, id }) {
   const dispatch = useDispatch();
   const toDetail = (id) => {
     dispatch(getExactIdMall({ idMall: id }));
@@ -25,8 +25,7 @@ export default function MapsMallCard({ navigate, imgUrl, name, id }) {
       <View className='gap-2 p-2'>
         <Text className='text-3xl'>{name}</Text>
         <Text className='text-xs'>
-          Jalan Pangeran Antasari No.36, RW.5, Bangka, Kec. Mampang Prapatan,
-          Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12150
+          {address}
         </Text>
         <View className='flex flex-row justify-between items-center px-1'>
           <View className='flex flex-row items-center'>
@@ -45,7 +44,7 @@ export default function MapsMallCard({ navigate, imgUrl, name, id }) {
               icon='map-marker-radius-outline'
               className='bg-transparent'
             />
-            <Text className='text-xs'>3.5 km</Text>
+            <Text className='text-xs'>approx 5 km</Text>
           </View>
         </View>
       </View>

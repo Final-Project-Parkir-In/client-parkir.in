@@ -51,7 +51,7 @@ export default function MyGarage({ navigation, route: { params } }) {
   }
   return (
     <SpecifiedView className='bg-white'>
-      <View className='p-3 items-end'>
+      <View className='p-3 items-end flex-row justify-between'>
         <Button
           icon='car'
           mode='contained'
@@ -59,6 +59,15 @@ export default function MyGarage({ navigation, route: { params } }) {
           onPress={() => navigation.navigate('Add New Car')}
         >
           Add New Car
+        </Button>
+        <Button
+          mode='contained'
+          onPress={() => {
+            changeToDefault(starId);
+          }}
+          className='w-fit mb-1 mt-4 bg-[#2F3B6E] rounded-xl self-center'
+        >
+          Set Default Car
         </Button>
       </View>
       <ScrollView className='h-full p-6 '>
@@ -83,8 +92,8 @@ export default function MyGarage({ navigation, route: { params } }) {
                   className=' bg-white shadow-md'
                 />
               </View>
-              <View className='border justify-center'>
-                <View className='border flex flex-row p-1'>
+              <View className=' justify-center'>
+                <View className=' flex flex-row p-1'>
                   <Text className='text-lg'>{el?.brand}</Text>
                   <Text className='text-lg mx-2'>|</Text>
                   <Text className='text-lg font-semibold'>{el?.type}</Text>
@@ -93,7 +102,7 @@ export default function MyGarage({ navigation, route: { params } }) {
                   <Text className='text-lg font-bold'>{el?.numberPlate}</Text>
                 </View>
               </View>
-              <View className='border w-[25%] h-[75%] ml-5 justify-center items-center'>
+              <View className=' w-[25%] h-[75%] ml-5 justify-center items-center'>
                 {el.isDefault ? (
                   <Avatar.Icon
                     size={70}
@@ -113,15 +122,6 @@ export default function MyGarage({ navigation, route: { params } }) {
             </TouchableOpacity>
           );
         })}
-        <Button
-          mode='contained'
-          onPress={() => {
-            changeToDefault(starId);
-          }}
-          className='w-80 mb-10 mt-4 bg-[#2F3B6E] rounded-xl'
-        >
-          Set Default Car
-        </Button>
       </ScrollView>
       {/* <ScrollView className='h-full p-6'></ScrollView> */}
     </SpecifiedView>

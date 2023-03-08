@@ -17,7 +17,7 @@ export default function PaymentScreens() {
     isError,
     error,
     refetch,
-  } = usePaySpotQuery({ parkingTransactionId, token }); // akan berdasrkan parking spot id
+  } = usePaySpotQuery({ parkingTransactionId, token, error }); // akan berdasrkan parking spot id
   useEffect(() => {
     refetch();
   }, [parkingTransactionId]);
@@ -25,6 +25,7 @@ export default function PaymentScreens() {
     return <Loader />;
   }
   if (isError) {
+    console.log(error, 'ini errornya');
     return <ErrorScreen />;
   }
   return (

@@ -20,9 +20,11 @@ import axios from 'axios';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useGetNearestMallMutation } from '../redux/services/parkirInApi';
 import ErrorScreen from './ErrorScreen';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getExactIdMall } from '../redux/slice/parkirInSlice';
 
 const MapBottomSheetTr = ({ navigation }) => {
+  const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
   const { token } = useSelector((state) => state.parkirInSlice);
   // get all data mall from rtk
@@ -103,8 +105,13 @@ const MapBottomSheetTr = ({ navigation }) => {
       </View>
     );
   };
-  const getDetailMall = () => {
-    cardRef.current.snapTo(1);
+  const showMall = () => {
+    cardRef.current.snapTo(0);
+  };
+
+  const toDetailMall = (id) => {
+    dispatch(getExactIdMall({ idMall: id }));
+    navigation.navigate('Mall Detail');
   };
 
   return (
@@ -126,6 +133,9 @@ const MapBottomSheetTr = ({ navigation }) => {
             latitudeDelta: coordinat.latitudeDelta,
             longitudeDelta: coordinat.longitudeDelta,
           }}
+          onPress={() => {
+            showMall();
+          }}
         >
           {/* lokasi kita */}
           <Marker coordinate={coordinat} pinColor={'blue'} />
@@ -141,7 +151,7 @@ const MapBottomSheetTr = ({ navigation }) => {
                 pinColor={'red'}
                 key={i + '-id-coordinate'}
                 onPress={() => {
-                  getDetailMall();
+                  toDetailMall(id);
                 }}
               />
             );

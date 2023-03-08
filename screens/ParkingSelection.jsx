@@ -72,7 +72,9 @@ export default function ParkingSelection({ navigation }) {
     <SpecifiedView style={{ flex: 1 }} className='bg-[#D9A14E]'>
       <ScrollView>
         <View className='h-16 justify-center items-center'>
-          <Text className='mt-4 text-xl font-bold'>Lippo Mall Kemang</Text>
+          <Text className='mt-4 text-xl font-bold'>
+            {parkingSpots[0].Mall.name}
+          </Text>
         </View>
         <View className='mt-4 h-[150%] p-4 items-center rounded-t-3xl bg-white'>
           <View className='my-4'>

@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -6,6 +7,7 @@ import {
   StyleSheet,
   Pressable,
   TouchableOpacity,
+  Linking,
 } from 'react-native';
 import DropDownItem from 'react-native-drop-down-item';
 
@@ -29,14 +31,26 @@ const DetailPage = ({ navigation, route: { params } }) => {
       },
     ],
   };
+  const [isCarIn, setIsCarIn] = useState(false);
   const { token, parkingTransactionId } = useSelector(
     (state) => state.parkirInSlice
   );
   const dispatch = useDispatch();
-  const { data, isLoading, isError, isSuccess } = useGetInfoBookingQuery({
-    token,
-    transactionId: parkingTransactionId,
-  });
+  const { data, isLoading, isError, isSuccess, refetch } =
+    useGetInfoBookingQuery({
+      token,
+      transactionId: parkingTransactionId,
+    });
+
+  useEffect(() => {
+    refetch();
+  }, []);
+
+  useEffect(() => {
+    if (data?.carIn) {
+      setIsCarIn(true);
+    }
+  }, [data]);
   if (isLoading) {
     return <Loader />;
   }
@@ -45,6 +59,7 @@ const DetailPage = ({ navigation, route: { params } }) => {
   }
   const toPay = (id) => {
     dispatch(getParkingTransactionId({ parkingTransactionId: id }));
+    console.log(data?.User, 'ini da');
     navigation.navigate('payment');
   };
 
@@ -64,17 +79,17 @@ const DetailPage = ({ navigation, route: { params } }) => {
             <View style={style.boxStatus}>
               <View className='gap-2'>
                 <Text style={style.textTitleDate}>
-                  {new Date(data.createdAt).toLocaleDateString('en-US')}
+                  {new Date(data?.createdAt)?.toLocaleDateString('en-US')}
                 </Text>
                 <Text style={style.textTitleDate}>
-                  {new Date(data.createdAt).toLocaleTimeString('en-US')}
+                  {new Date(data?.createdAt)?.toLocaleTimeString('en-US')}
                 </Text>
               </View>
             </View>
             <View style={style.status}>
               <Text style={style.textTitleDate}>Order Id</Text>
               <Text style={{ color: '#c0c4c0', marginTop: 4 }}>
-                {data.id}-PI-23
+                {data?.id}-PI-23
               </Text>
             </View>
           </View>
@@ -83,16 +98,16 @@ const DetailPage = ({ navigation, route: { params } }) => {
               <Image
                 style={{ width: '90%', height: 55, borderRadius: 100 }}
                 source={{
-                  uri: data.ParkingSlot.Mall.imgUrl,
+                  uri: data?.ParkingSlot?.Mall?.imgUrl,
                 }}
               />
             </View>
             <View style={style.info}>
               <Text style={{ fontWeight: '900', fontSize: 17 }}>
-                {data.ParkingSlot.Mall.name}
+                {data?.ParkingSlot.Mall.name}
               </Text>
               <Text style={{ color: '#c0c4c0' }}>
-                {data.ParkingSlot.Mall.address}
+                {data?.ParkingSlot.Mall.address}
               </Text>
             </View>
           </View>
@@ -103,7 +118,7 @@ const DetailPage = ({ navigation, route: { params } }) => {
               </View>
               <View style={style.lokasiInfo}>
                 <Text style={{ fontWeight: '900', fontSize: 17 }}>
-                  {data.ParkingSlot.spot}
+                  {data?.ParkingSlot.spot}
                 </Text>
               </View>
             </View>
@@ -132,7 +147,7 @@ const DetailPage = ({ navigation, route: { params } }) => {
             marginBottom: 20,
           }}
         >
-          {data?.carIn ? (
+          {isCarIn ? (
             <TouchableOpacity
               onPress={() => {
                 toPay(data?.id);
@@ -216,13 +231,13 @@ export default DetailPage;
 const style = StyleSheet.create({
   container: {
     alignItems: 'center',
-    justifyContent: 'center',
+    // justifyContent: 'center',
     flex: 1,
     width: '100%',
   },
   cardTextStatus: {
     width: '90%',
-    justifyContent: 'center',
+    // justifyContent: 'center',
     flexDirection: 'row',
     flexWrap: 'wrap',
     backgroundColor: '#fff',
@@ -232,7 +247,7 @@ const style = StyleSheet.create({
   },
   cardTextDate: {
     width: '90%',
-    justifyContent: 'center',
+    // justifyContent: 'center',
     flexDirection: 'row',
     flexWrap: 'wrap',
     backgroundColor: '#fff',
@@ -245,7 +260,7 @@ const style = StyleSheet.create({
   cardTextLokasi: {
     width: '90%',
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    // justifyContent: 'space-around',
   },
   boxStatus: {
     width: '50%',
@@ -255,28 +270,28 @@ const style = StyleSheet.create({
   boxImgInfo: {
     width: '20%',
     alignItems: 'center',
-    marginBottom: 12
+    marginBottom: 12,
   },
   boxLokasiInfo: {
     width: '40%',
-    justifyContent: 'center',
+    // justifyContent: 'center',
   },
   status: {
     width: '40%',
     padding: 7,
-    justifyContent: 'center',
+    // justifyContent: 'center',
     alignItems: 'flex-end',
   },
   info: {
     width: '70%',
     padding: 7,
-    justifyContent: 'start',
+    // justifyContent: 'start',
     alignItems: 'flex-start',
   },
   lokasiInfo: {
     width: '50%',
     padding: 7,
-    justifyContent: 'center',
+    // justifyContent: 'center',
     alignItems: 'flex-end',
   },
   textTitleStatus: {

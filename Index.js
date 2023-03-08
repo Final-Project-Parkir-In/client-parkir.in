@@ -122,6 +122,7 @@ export default function Index() {
       dispatch(takeToken({ token: value }));
     } catch (e) {
       // error reading value
+      console.log(err);
     }
   };
   useEffect(() => {

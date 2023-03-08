@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const parkirInApi = createApi({
   reducerPath: 'parkirInApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://0d22-139-228-111-126.ap.ngrok.io',
+    baseUrl: 'https://0385-139-228-111-126.ap.ngrok.io',
   }),
   endpoints: (builder) => ({
     // endpoint untuk user register
@@ -26,13 +26,17 @@ export const parkirInApi = createApi({
     }),
     // endpoint ambil semua malls
     getAllMalls: builder.query({
-      query: ({ token }) => ({
-        url: '/malls',
-        method: 'get',
-        headers: {
-          access_token: token,
-        },
-      }),
+      query: ({ token, query }) => {
+        let urlHit = '/malls';
+
+        return {
+          url: urlHit,
+          method: 'get',
+          headers: {
+            access_token: token,
+          },
+        };
+      },
     }),
     // enpoint mall berdasarkan id
     getMallById: builder.query({
@@ -94,7 +98,7 @@ export const parkirInApi = createApi({
     // endpoint untuk mendapatkan nearst mall
     getNearestMall: builder.mutation({
       query: ({ token, locationUser }) => ({
-        url: 'nearestMalls',
+        url: '/nearestMalls',
         headers: {
           access_token: token,
         },
@@ -110,6 +114,36 @@ export const parkirInApi = createApi({
         body: dataCar,
       }),
     }),
+    getAllCars: builder.query({
+      query: ({ token }) => ({
+        url: '/cars',
+        headers: {
+          access_token: token,
+        },
+      }),
+    }),
+    addSecondCarr: builder.mutation({
+      query: ({ token, carData }) => ({
+        url: '/addSecondCar',
+        // { numberPlate, brand, type } haru gini carDatanya
+        body: carData,
+        headers: {
+          access_token: token,
+        },
+        method: 'post',
+      }),
+    }),
+    changeDefaultCar: builder.mutation({
+      query: ({ token, carId }) => {
+        return {
+          url: '/changeDefaultCar/' + carId,
+          headers: {
+            access_token: token,
+          },
+          method: 'patch',
+        };
+      },
+    }),
   }),
 });
 export const {
@@ -124,4 +158,7 @@ export const {
   useGetInfoBookingQuery,
   useGetNearestMallMutation,
   usePostAddCarMutation,
+  useGetAllCarsQuery,
+  useAddSecondCarrMutation,
+  useChangeDefaultCarMutation,
 } = parkirInApi;

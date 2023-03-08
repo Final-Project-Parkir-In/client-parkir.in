@@ -68,18 +68,10 @@ export default function MallList({ navigation }) {
         className='bg-slate-50 mx-3 mt-2 h-[40px] rounded-2xl'
       />
 
-      <View className='flex flex-row justify-between p-3'>
+      <View className='flex flex-row justify-start p-3'>
         <Text className='text-lg font-semibold p-1'>
           Lokasi Parkir.In terdekat
         </Text>
-        <Button
-          icon='map-marker-radius-outline'
-          mode='contained'
-          className='bg-amber-500'
-          onPress={() => console.log('Pressed')}
-        >
-          <Text>Petunjk</Text>
-        </Button>
       </View>
       <ScrollView className='h-screen'>
         {malls().map((el, i) => {

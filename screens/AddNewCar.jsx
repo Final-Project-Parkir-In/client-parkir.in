@@ -13,13 +13,12 @@ export default function AddNewCar({ navigation }) {
   const [type, setType] = useState('');
   const [numberPlate, setNumberPlate] = useState('');
   const { token } = useSelector((state) => state.parkirInSlice);
-  const [addSecondCar, { isLoading, isError, error, data }] =
+  const [addSecondCar, { isLoading, isError, error, data,isSuccess }] =
     useAddSecondCarrMutation();
   const handleAddCar = () => {
     // console.log(brand, type, numberPlate);
     addSecondCar({ token, carData: { numberPlate, brand, type } });
-    let dependencyChange = Math.random();
-    navigation.navigate('Garasi Saya', dependencyChange);
+    // let dependencyChange = Math.random();
   };
   if (isLoading) {
     return <Loader />;
@@ -27,7 +26,10 @@ export default function AddNewCar({ navigation }) {
   if (isError) {
     return <ErrorScreen />;
   }
+  if(isSuccess){
+    navigation.navigate('Garasi Saya', data.car.id);
 
+  }
   return (
     <SpecifiedView className='p-4 h-screen'>
       <ScrollView className='h-full mt-8'>

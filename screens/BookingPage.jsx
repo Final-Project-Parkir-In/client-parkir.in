@@ -34,12 +34,13 @@ const BookingPage = ({ navigation }) => {
     console.log(error, 'error');
     return <ErrorScreen />;
   }
+  console.log(data, "<<< nini")
 
   return (
     <ScrollView>
       <View style={style.container}>
         <View style={style.navigation}>
-          <TextInput
+          {/* <TextInput
             placeholder='🔍 Cari E-Tiket'
             editable
             multiline
@@ -48,7 +49,7 @@ const BookingPage = ({ navigation }) => {
             value={search}
             onChangeText={(search) => onChangeSearch(search)}
             style={style.textInput}
-          />
+          /> */}
           <View style={style.cardTextProductFilter}>
             <Pressable style={style.boxFilter}>
               <Text style={{ color: '#ffff' }}>Berlangsung</Text>
@@ -56,38 +57,13 @@ const BookingPage = ({ navigation }) => {
             <Pressable style={style.boxFilter}>
               <Text style={{ color: '#ffff' }}>Selesai</Text>
             </Pressable>
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'center',
-                marginStart: 100,
-              }}
-            >
-              <View
-                style={{ alignItems: 'flex-end', justifyContent: 'center' }}
-              >
-                <Ionicons
-                  name='filter-outline'
-                  size={25}
-                  color='#ffc629'
-                ></Ionicons>
-              </View>
-              <View
-                style={{
-                  alignItems: 'flex-end',
-                  justifyContent: 'center',
-                  marginLeft: 5,
-                }}
-              >
-                <Text>Filter</Text>
-              </View>
-            </View>
           </View>
         </View>
+        <View className='w-full px-2'>
         {data?.map((el) => {
-          console.log(el, '<==');
-          const imgActive = 'w-[80%] h-[60px] rounded-lg';
-          const imgExpired = 'w-[80%] h-[60px] rounded-lg opacity-50';
+          // console.log(el, '<==');
+          const imgActive = 'w-full h-full';
+          const imgExpired = 'w-full h-full  opacity-50';
           const textActive = 'font-bold text-lg text-left';
           const textExpired = 'font-bold text-lg text-left opacity-50';
           return (
@@ -101,7 +77,7 @@ const BookingPage = ({ navigation }) => {
               style={style.cardTextProduct}
               key={el.id + 'screen-tiket'}
             >
-              <View style={style.boxProductImg}>
+              <View className='w-[35%] h-full items-center'>
                 <Image
                   source={{
                     uri: el.ParkingSlot.Mall.imgUrl,
@@ -110,21 +86,25 @@ const BookingPage = ({ navigation }) => {
                   className={el.isExpired ? imgExpired : imgActive}
                 />
               </View>
-              <View style={style.boxProduct}>
-                <Text className={el.isExpired ? textExpired : textActive}>
-                  {el.ParkingSlot.Mall.name}
-                </Text>
-                <Text>{el.ParkingSlot.Mall.address}</Text>
-                <Text
-                  style={{
-                    color: '#c4c4c4',
-                    fontSize: 13,
-                    marginTop: 5,
-                    textDecorationLine: 'underline',
-                  }}
-                >
-                  Tap to see detail
-                </Text>
+              <View className=" ml-[10px] justify-center">
+                {/* style={style.boxProduct} */}
+                <View>
+                  <Text className={el.isExpired ? textExpired : textActive}>
+                    {el.ParkingSlot.Mall.name}
+                  </Text>
+                  <Text className="text-[10px] font-light">{el.ParkingSlot.Mall.address}</Text>
+                  <Text className="my-1">{new Date(el.createdAt)?.toLocaleDateString('en-US')}       {new Date(el.createdAt)?.toLocaleTimeString('en-US')}</Text>
+                  <Text
+                    style={{
+                      color: '#c4c4c4',
+                      fontSize: 13,
+                      marginTop: 5,
+                      textDecorationLine: 'underline',
+                    }}
+                  >
+                    Tap to see detail
+                  </Text>
+                </View>
               </View>
             </Pressable>
           );
@@ -147,6 +127,8 @@ const BookingPage = ({ navigation }) => {
           </>
         )}
         {/* Bila belum ada transaksi */}
+          
+        </View>
       </View>
     </ScrollView>
   );
@@ -161,6 +143,7 @@ const style = StyleSheet.create({
     justifyContent: 'center',
     height: '100%',
     alignContent: 'center',
+    
   },
   navigation: {
     flex: 1,
@@ -203,7 +186,7 @@ const style = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     backgroundColor: '#ffff',
-    borderRadius: 10,
+    // borderRadius: 10,
     marginTop: 5,
     shadowColor: '#000',
     shadowOffset: {
@@ -225,7 +208,7 @@ const style = StyleSheet.create({
     marginBottom: 15,
   },
   boxProduct: {
-    width: '50%',
+    width: '60%',
     justifyContent: 'center',
     marginLeft: 10,
     // borderWidth: 2
@@ -238,13 +221,19 @@ const style = StyleSheet.create({
   },
   imageCardProduct: {
     width: '80%',
+    height: '100%',
     height: 60,
     borderRadius: 10,
+    borderColor:'red',
+    borderWidth:'2px'
+
   },
-  boxProductImg: {
-    width: '30%',
-    padding: 4,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+  // boxProductImg: {
+  //   width: '34%',
+  //   // padding: 4,
+  //   alignItems: 'center',
+  //   justifyContent: 'center',
+  //   borderColor:'black',
+  //   borderWidth:'2px'
+  // },
 });

@@ -38,9 +38,7 @@ export default function MallDetail({ navigation }) {
             <View className='gap-2 p-2'>
               <Text className='text-3xl'>{data?.name}</Text>
               <Text className='text-xs'>
-                Jalan Pangeran Antasari No.36, RW.5, Bangka, Kec. Mampang
-                Prapatan, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta
-                12150
+                {data?.address}
               </Text>
               <View className='flex flex-row justify-between items-center px-1'>
                 <View className='flex flex-row items-center'>
@@ -52,7 +50,7 @@ export default function MallDetail({ navigation }) {
                   />
                   <Text className='text-xs'>10:00 - 22:00</Text>
                 </View>
-                <View className='flex flex-row items-center'>
+                {/* <View className='flex flex-row items-center'>
                   <Avatar.Icon
                     size={24}
                     color='black'
@@ -60,16 +58,16 @@ export default function MallDetail({ navigation }) {
                     className='bg-transparent'
                   />
                   <Text className='text-xs'>3.5 km</Text>
-                </View>
+                </View> */}
               </View>
             </View>
-            <View className='p-4 h-fit bg-slate-100'>
+            {/* <View className='p-4 h-fit bg-slate-100'>
               <View className='flex flex-row justify-between'>
                 <Text>Booking Fee</Text>
                 <Text className='font-bold text-red-600'>Rp. 15.000*</Text>
               </View>
               <Text className='text-xs'>*belum termasuk biaya parkir</Text>
-            </View>
+            </View> */}
 
             <List.Section title='' className='px-3'>
               <List.Accordion

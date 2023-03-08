@@ -15,9 +15,11 @@ export default function Login({ navigation }) {
   const [password, setPassword] = useState('');
   const [loginUser, { isLoading, isError, data, isSuccess, error }] =
     useLoginUserMutation();
-  const storeData = async (value) => {
+  const storeData = async (value,{username,email}) => {
     try {
       await AsyncStorage.setItem('access_token', value);
+      await AsyncStorage.setItem('username', username);
+      await AsyncStorage.setItem('email', email);
       dispatch(takeToken({ token: value }));
     } catch (err) {
       // saving error
@@ -38,7 +40,7 @@ export default function Login({ navigation }) {
     dispatch(takeToken({ token: '' }));
   }
   if (isSuccess) {
-    storeData(data.access_token);
+    storeData(data.access_token,{username:data.username,email:data.email});
   }
 
   return (

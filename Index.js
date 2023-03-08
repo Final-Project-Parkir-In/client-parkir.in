@@ -121,7 +121,6 @@ export default function Index() {
       const value = await AsyncStorage.getItem('access_token');
       dispatch(takeToken({ token: value }));
     } catch (e) {
-      // error reading value
       console.log(err);
     }
   };

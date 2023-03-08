@@ -67,13 +67,14 @@ export default function ParkingSelection({ navigation }) {
       alert('spot udah di booking');
     }
   };
+  // console.log(parkingSpots)
 
   return (
     <SpecifiedView style={{ flex: 1 }} className='bg-[#D9A14E]'>
       <ScrollView>
         <View className='h-16 justify-center items-center'>
           <Text className='mt-4 text-xl font-bold'>
-            {parkingSpots[0].Mall.name}
+            {parkingSpots[0]?.Mall?.name}
           </Text>
         </View>
         <View className='mt-4 h-[150%] p-4 items-center rounded-t-3xl bg-white'>
@@ -128,7 +129,10 @@ export default function ParkingSelection({ navigation }) {
       <View className='w-full justify-center items-center absolute bottom-0 bg-white'>
         <View className='h-14 p-4 w-full flex flex-row justify-between items-center'>
           <Text className='font-bold'>Booking Price</Text>
-          <Text className='font-bold'>Rp 10.000**</Text>
+          <Text className='font-bold'>{parkingSpots[0].priceOfSpot.toLocaleString("id-ID", {
+            style: "currency",
+            currency: "IDR",
+          })}</Text>
         </View>
         <Button
           mode='contained'

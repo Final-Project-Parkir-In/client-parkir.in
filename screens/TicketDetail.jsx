@@ -79,7 +79,7 @@ const DetailPage = ({ navigation, route: { params } }) => {
             <View style={style.boxStatus}>
               <View className='gap-2'>
                 <Text style={style.textTitleDate}>
-                  {new Date(data?.createdAt)?.toLocaleDateString('en-US')}
+                  {new Date(data?.createdAt)?.toLocaleDateString('id-ID')}
                 </Text>
                 <Text style={style.textTitleDate}>
                   {new Date(data?.createdAt)?.toLocaleTimeString('en-US')}

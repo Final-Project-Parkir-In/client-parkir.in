@@ -4,8 +4,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import SpecifiedView from '../components/SpecifiedView';
 import { useDispatch } from 'react-redux';
 import { takeToken } from '../redux/slice/parkirInSlice';
+import { useEffect, useState } from 'react';
 export default function MyAccount({ navigation }) {
   const dispatch = useDispatch();
+  const [user,setUser] = useState({username:'',email:''})
   const handleSingOut = async () => {
     try {
       await AsyncStorage.removeItem('access_token');
@@ -14,6 +16,17 @@ export default function MyAccount({ navigation }) {
       console.log(err);
     }
   };
+  useEffect(()=>{
+    (async () => {
+      try {
+        const username = await AsyncStorage.getItem('username')
+        const email = await AsyncStorage.getItem('email')
+        setUser({...user,username,email})
+      } catch (err) {
+        console.log(err)
+      }
+    })()
+  },[])
 
   return (
     <SpecifiedView className='bg-white'>
@@ -28,12 +41,12 @@ export default function MyAccount({ navigation }) {
             ></Image>
           </View>
           <View className=' w-fit p-2 space-y-2'>
-            <Text>John Doe</Text>
-            <Text>johndoe@mail.com</Text>
+            <Text>{user.username}</Text>
+            <Text>{user.email}</Text>
           </View>
         </View>
         <View className='my-8 h-fit '>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             className='h-fit my-2 flex flex-row items-center justify-between'
             onPress={() => console.log('belom kehandle')}
           >
@@ -52,7 +65,7 @@ export default function MyAccount({ navigation }) {
               color='#D9A14E'
               className='bg-transparent'
             />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           <TouchableOpacity
             className='h-fit my-2 flex flex-row items-center justify-between'
             onPress={() => navigation.navigate('Garasi Saya')}

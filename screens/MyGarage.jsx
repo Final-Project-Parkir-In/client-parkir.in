@@ -27,7 +27,6 @@ export default function MyGarage({ navigation, route: { params } }) {
   // useEffect(() => {
   //   refetch();
   // }, [data]);
-  console.log(params, 'ini dependency');
   useEffect(() => {
     refetch();
   }, [params]);
@@ -51,7 +50,7 @@ export default function MyGarage({ navigation, route: { params } }) {
   }
   return (
     <SpecifiedView className='bg-white'>
-      <View className='p-3 items-end flex-row justify-between'>
+      <View className='flex-row justify-between items-center px-8 pt-4'>
         <Button
           icon='car'
           mode='contained'
@@ -65,12 +64,12 @@ export default function MyGarage({ navigation, route: { params } }) {
           onPress={() => {
             changeToDefault(starId);
           }}
-          className='w-fit mb-1 mt-4 bg-[#2F3B6E] rounded-xl self-center'
+          className='w-fit mb-1 bg-[#2F3B6E] rounded-3xl'
         >
           Set Default Car
         </Button>
       </View>
-      <ScrollView className='h-full p-6 '>
+      <ScrollView className='h-full p-6'>
         {data.map((el) => {
           return (
             <TouchableOpacity
@@ -84,15 +83,15 @@ export default function MyGarage({ navigation, route: { params } }) {
                 setStarId(el.id);
               }}
             >
-              <View className='bborder w-[25%] h-[75%] justify-center items-center'>
+              <View className='bborder w-[20%] h-[75%] justify-center items-center mr-2'>
                 <Avatar.Icon
-                  size={70}
+                  size={60}
                   icon='car-hatchback'
                   color='#2F3B6E'
                   className=' bg-white shadow-md'
                 />
               </View>
-              <View className=' justify-center'>
+              <View className='justify-center w-[200px]'>
                 <View className=' flex flex-row p-1'>
                   <Text className='text-lg'>{el?.brand}</Text>
                   <Text className='text-lg mx-2'>|</Text>
@@ -102,17 +101,20 @@ export default function MyGarage({ navigation, route: { params } }) {
                   <Text className='text-lg font-bold'>{el?.numberPlate}</Text>
                 </View>
               </View>
-              <View className=' w-[25%] h-[75%] ml-5 justify-center items-center'>
+              <View className='w-fit h-fit ml-5 justify-center items-center'>
                 {el.isDefault ? (
+                  <>
                   <Avatar.Icon
-                    size={70}
+                    size={50}
                     icon={'star'}
                     color='#D9A14E'
                     className=' bg-white'
                   />
+                  <Text className="text-slate-500">Active</Text>
+                  </>
                 ) : (
                   <Avatar.Icon
-                    size={70}
+                    size={50}
                     icon={'star-outline'}
                     color='#D9A14E'
                     className=' bg-white'

@@ -69,9 +69,9 @@ export default function MallList({ navigation }) {
       />
 
       <View className='flex flex-row justify-start p-3'>
-        <Text className='text-lg font-semibold p-1'>
+        {/* <Text className='text-lg font-semibold p-1'>
           Lokasi Parkir.In terdekat
-        </Text>
+        </Text> */}
       </View>
       <ScrollView className='h-fit mb-28'>
         {malls().map((el, i) => {

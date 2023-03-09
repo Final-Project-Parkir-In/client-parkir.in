@@ -81,7 +81,7 @@ export default function Login({ navigation }) {
         <View className='justify-center items-center mt-8 '>
           <Text className='text-[#D9A14E]'>Don't have account?</Text>
           <Button
-            icon='donkey'
+            icon='login'
             mode='contained'
             textColor='black'
             className='bg-[#D9A14E] w-[15vh] my-2'

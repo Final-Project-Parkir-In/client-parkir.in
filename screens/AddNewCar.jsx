@@ -43,7 +43,8 @@ export default function AddNewCar({ navigation }) {
 
               <Picker.Item label='Toyota' value='Toyota' />
               <Picker.Item label='Honda' value='Honda' />
-              <Picker.Item label='Mustibisa' value='Mustibisa' />
+              <Picker.Item label='Mitsubishi' value='Mitsubishi' />
+              <Picker.Item label='Mazda' value='Mazda' />
             </Picker>
           </View>
 
@@ -55,7 +56,14 @@ export default function AddNewCar({ navigation }) {
               <Picker.Item label='Please select' />
               <Picker.Item label='Fortuner' value='Fortuner' />
               <Picker.Item label='Innova' value='Innova' />
-              <Picker.Item label='Esemka' value='Esemka' />
+              <Picker.Item label='Avanza' value='Avanza' />
+              <Picker.Item label='CRV' value='CRV' />
+              <Picker.Item label='Civic' value='Civic' />
+              <Picker.Item label='Brio' value='Brio' />
+              <Picker.Item label='Pajero' value='Pajero' />
+              <Picker.Item label='Expander' value='Expander' />
+              <Picker.Item label='Mazda 2' value='Mazda 2' />
+              <Picker.Item label='CX-5' value='CX-5' />
             </Picker>
           </View>
 

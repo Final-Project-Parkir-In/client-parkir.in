@@ -34,7 +34,7 @@ const BookingPage = ({ navigation }) => {
     console.log(error, 'error');
     return <ErrorScreen />;
   }
-  console.log(data, "<<< nini")
+  // console.log(data[0].carOut, "<<< nini")
 
   return (
     <ScrollView>
@@ -66,6 +66,15 @@ const BookingPage = ({ navigation }) => {
           const imgExpired = 'w-full h-full  opacity-50';
           const textActive = 'font-bold text-lg text-left';
           const textExpired = 'font-bold text-lg text-left opacity-50';
+          const expiredText = <View className="rounded-xl p-1 px-2 bg-red-300"><Text className="text-slate-700 font-light">Expired</Text></View>
+          const activeText = <View className="rounded-xl p-1 px-2 bg-[#f5c47a]"><Text className="text-slate-700 font-light">Active</Text></View>
+          const doneText = <View className="rounded-xl p-1 px-2 bg-green-300"><Text className="text-slate-700 font-light">Done</Text></View>
+          const mallAddress = () => {
+            return el.ParkingSlot.Mall.address?.length > 39
+              ? el.ParkingSlot.Mall.address.substring(0, 39) + "..."
+              : el.ParkingSlot.Mall.address;
+          };
+
           return (
             <Pressable
               onPress={() => {
@@ -92,18 +101,23 @@ const BookingPage = ({ navigation }) => {
                   <Text className={el.isExpired ? textExpired : textActive}>
                     {el.ParkingSlot.Mall.name}
                   </Text>
-                  <Text className="text-[10px] font-light">{el.ParkingSlot.Mall.address}</Text>
+                  <View className="w-[240px]">
+                    <Text className="text-[12px] font-light">{mallAddress()}</Text>
+                  </View>
                   <Text className="my-1">{new Date(el.createdAt)?.toLocaleDateString('en-US')}       {new Date(el.createdAt)?.toLocaleTimeString('en-US')}</Text>
-                  <Text
-                    style={{
-                      color: '#c4c4c4',
-                      fontSize: 13,
-                      marginTop: 5,
-                      textDecorationLine: 'underline',
-                    }}
-                  >
-                    Tap to see detail
-                  </Text>
+                  <View className="flex flex-row justify-between items-center w-60">
+                    <Text
+                      style={{
+                        color: '#c4c4c4',
+                        fontSize: 13,
+                        marginTop: 5,
+                        textDecorationLine: 'underline',
+                      }}
+                    >
+                      Tap to see detail
+                    </Text>
+                      {el.isExpired ? expiredText : el.carOut ? doneText: activeText }
+                  </View>
                 </View>
               </View>
             </Pressable>
@@ -116,12 +130,12 @@ const BookingPage = ({ navigation }) => {
               source={{
                 uri: `https://www.mtwi.co.id/public/assets/images/not-found.png`,
               }}
-              style={{ flex: 5, width: '90%', height: 250, marginTop: '30%' }}
+              style={{ flex: 5, width: '90%', height: 250, marginTop: '30%', marginLeft: 20 }}
             />
-            <Text style={{ fontSize: 20, fontWeight: 'bold' }}>
+            <Text style={{ fontSize: 20, fontWeight: 'bold', textAlign: "center", marginTop: 30 }}>
               Belum ada transaksi
             </Text>
-            <Text style={{ fontSize: 13 }}>
+            <Text style={{ fontSize: 13, textAlign: "center" }}>
               Lakukan transaksi kamu dengan Parkir.In
             </Text>
           </>

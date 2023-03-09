@@ -32,7 +32,7 @@ export default function MallListCard({
         <Text className='font-bold'>{name}</Text>
         <Text className=''>10:00 - 22.00 WIB</Text>
         <Text className='font-semibold'>Rp. 15.000</Text>
-        <Text className='font-light text-right'>3.456 km</Text>
+        {/* <Text className='font-light text-right'>3.456 km</Text> */}
       </View>
     </TouchableOpacity>
   );

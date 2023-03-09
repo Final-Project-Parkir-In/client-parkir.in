@@ -67,7 +67,7 @@ export default function ParkingSelection({ navigation }) {
       alert('spot udah di booking');
     }
   };
-  // console.log(parkingSpots)
+  console.log(parkingSpots, "<<<<<<<INI WOYY")
 
   return (
     <SpecifiedView style={{ flex: 1 }} className='bg-[#D9A14E]'>

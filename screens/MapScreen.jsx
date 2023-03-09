@@ -155,7 +155,9 @@ const MapBottomSheetTr = ({ navigation }) => {
                 onPress={() => {
                   toDetailMall(id);
                 }}
-              />
+              >
+                <Image source={require('../assets/parkirin_icon.png')} className="w-[70px] h-[80px]" />
+              </Marker>
             );
           })}
         </MapView>

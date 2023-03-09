@@ -24,6 +24,7 @@ export default function MallDetail({ navigation }) {
   if (isError) {
     return <ErrorScreen />;
   }
+  console.log(data)
   return (
     <View style={{ flex: 1 }}>
       <ScrollView>
@@ -78,15 +79,26 @@ export default function MallDetail({ navigation }) {
               >
                 <View className='gap-2 px-4'>
                   <Text className='text-xs'>
-                    1. User hanya dapat booking untuk maksimal 2 jam kedepan
+                    1. User dapat memilih mall dengan mencari tempat parkir terdekat menggunakan Parkir.In nearby & Parkir.In mall list
                   </Text>
                   <Text className='text-xs'>
-                    2. User tidak dapat membatalkan booking
+                    2. User mimilih mall tujuan yang ingin dibooking
                   </Text>
                   <Text className='text-xs'>
-                    3. Aplikasi Parkir.In blablabla, belum termasuk{' '}
+                    3. User memilih spot parkir yang tersedia & langsung membooking spot yang sudah dipilih
                   </Text>
-                  <Text className='text-xs'>4. Lorem ipsum blabla blabla</Text>
+                  <Text className='text-xs'>
+                    4. Setelah melakukan booking, akan dialihkan ke halaman "My Ticket" dan dapat melihat detail tiket yang baru dibooking
+                  </Text>
+                  <Text className='text-xs'>
+                    5. Setelah booking ticket tergenerate, user diharapkan melakukan checkin ke mall tujuan dalam 1 jam kedepan
+                  </Text>
+                  <Text className='text-xs'>
+                    6. Ketika tiba di mall tujuan, user dapat langsung menunjukkan QR Code dari booking ticket yang masih berlaku
+                  </Text>
+                  <Text className='text-xs'>
+                    5. Pembayaran akan dilakukan ketika User ingin melakukan check out dengan menekan tombol "Check Out" pada detail tiket
+                  </Text>
                 </View>
               </List.Accordion>
             </List.Section>
@@ -100,15 +112,17 @@ export default function MallDetail({ navigation }) {
               >
                 <View className='gap-2 mb-[120px] px-4'>
                   <Text className='text-xs'>
-                    1. User hanya dapat booking untuk maksimal 2 jam kedepan
+                    1. User hanya dapat booking untuk maksimal 1 jam kedepan
                   </Text>
                   <Text className='text-xs'>
                     2. User tidak dapat membatalkan booking
                   </Text>
                   <Text className='text-xs'>
-                    3. Aplikasi Parkir.In blablabla, belum termasuk{' '}
+                    3. Apabila dalam 1 jam semenjak booking User tidak melakukan check in, maka tiket booking akan otomatis hangus
                   </Text>
-                  <Text className='text-xs'>4. Lorem ipsum blabla blabla</Text>
+                  <Text className='text-xs'>
+                    4. Biaya yang tertera merupakan tarif untuk per 1 jam
+                  </Text>
                 </View>
               </List.Accordion>
             </List.Section>

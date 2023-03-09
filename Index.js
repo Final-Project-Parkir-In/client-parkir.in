@@ -78,7 +78,7 @@ const StackTicket = () => {
         component={PaymentScreens}
       />
       <Stack.Screen
-        options={{ headerShown: true }}
+        options={{ headerShown: false }}
         name='Ticket Detail'
         component={DetailPage}
       />
@@ -91,7 +91,7 @@ const StackAccount = () => {
     <Stack.Navigator>
       <Stack.Screen
         options={{ headerShown: true }}
-        name='My Account'
+        name='Account'
         component={MyAccount}
       />
       <Stack.Screen
@@ -156,7 +156,7 @@ export default function Index() {
                 iconName = focused ? 'home' : 'home-outline';
               } else if (route.name === 'My Ticket') {
                 iconName = focused ? 'document-text' : 'document-text-outline';
-              } else if (route.name === 'My-Account') {
+              } else if (route.name === 'My Account') {
                 iconName = focused ? 'person' : 'person-outline';
               }
               return <Ionicons name={iconName} size={size} color={color} />;
@@ -177,7 +177,7 @@ export default function Index() {
           />
           <Tab.Screen
             options={{ headerShown: false }}
-            name='My-Account'
+            name='My Account'
             component={StackAccount}
           />
         </Tab.Navigator>

@@ -62,6 +62,7 @@ const DetailPage = ({ navigation, route: { params } }) => {
     console.log(data?.User, 'ini da');
     navigation.navigate('payment');
   };
+  // console.log(data.carOut,'ini data')
 
   return (
     <ScrollView>
@@ -148,6 +149,10 @@ const DetailPage = ({ navigation, route: { params } }) => {
           }}
         >
           {isCarIn ? (
+            data.carOut ? 
+            <View className="p-5 bg-[#D9A14E] rounded-3xl">
+              <Text className="text-lg font-bold text-[#2F3B6E]">Already Paid</Text>
+            </View> :
             <TouchableOpacity
               className='w-full h-16 justify-center items-center bg-[#D9A14E] rounded-3xl'
               onPress={() => {
@@ -158,25 +163,30 @@ const DetailPage = ({ navigation, route: { params } }) => {
                 CHECK OUT
               </Text>
             </TouchableOpacity>
+
           ) : (
-            <QRCode
-              value={JSON.stringify({
-                name: data?.User?.name,
-                mall: data?.ParkingSlot?.Mall?.name,
-                plat: data?.User?.Cars[0]?.numberPlate,
-                spotParkir: data?.ParkingSlot?.spot,
-                typeMobil: data?.User?.Cars[0]?.type,
-                brandMobil: data?.User?.Cars[0]?.brand,
-                id: data?.id,
-              })}
-              logo={{
-                uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAA..',
-              }}
-              logoSize={50}
-              size={200}
-              logoBackgroundColor='transparent'
-              className='w-full h-full'
-            />
+
+            data.isExpired? 
+            <View className="p-5 bg-red-300 rounded-3xl w-[200px]">
+              <Text className="text-lg font-bold text-slate-600 text-center">Already Expired</Text>
+            </View> : <QRCode
+            value={JSON.stringify({
+              name: data?.User?.name,
+              mall: data?.ParkingSlot?.Mall?.name,
+              plat: data?.User?.Cars[0]?.numberPlate,
+              spotParkir: data?.ParkingSlot?.spot,
+              typeMobil: data?.User?.Cars[0]?.type,
+              brandMobil: data?.User?.Cars[0]?.brand,
+              id: data?.id,
+            })}
+            logo={{
+              uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAA..',
+            }}
+            logoSize={50}
+            size={200}
+            logoBackgroundColor='transparent'
+            className='w-full h-full'
+          />
           )}
         </View>
         {/* QR Image */}
